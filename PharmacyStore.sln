@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28124.53
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyStore.Models", "PharmacyStore.Models\PharmacyStore.Models.csproj", "{01EF5A92-2AD1-4D95-B0D5-174A726DBF6E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyStore.Services", "PharmacyStore.Services\PharmacyStore.Services.csproj", "{40BBA012-EB29-4845-8175-29E484ECA6AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{01EF5A92-2AD1-4D95-B0D5-174A726DBF6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{01EF5A92-2AD1-4D95-B0D5-174A726DBF6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{01EF5A92-2AD1-4D95-B0D5-174A726DBF6E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{40BBA012-EB29-4845-8175-29E484ECA6AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{40BBA012-EB29-4845-8175-29E484ECA6AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{40BBA012-EB29-4845-8175-29E484ECA6AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{40BBA012-EB29-4845-8175-29E484ECA6AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
