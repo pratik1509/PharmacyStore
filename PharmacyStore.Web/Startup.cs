@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PharmacyStore.Framework.DependencyRegister;
 using PharmacyStore.Services;
 using PharmacyStore.Services.abstractions;
 using PharmacyStore.Web.Mapper.DoctorMapper;
@@ -46,11 +47,13 @@ namespace PharmacyStore.Web
 			#endregion
 
 			services.AddSingleton(mapper);
-			services.AddSingleton<IDoctorServices, DoctorService>();			
+			services.AddSingleton<IDoctorServices, DoctorService>();
 
-			#region swagger settings
+            DIEngineContext.ServiceProvider = services.BuildServiceProvider();
 
-			services.AddSwaggerGen(c =>
+            #region swagger settings
+
+            services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new Info
 				{

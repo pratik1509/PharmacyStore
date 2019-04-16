@@ -20,6 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PharmacyStore.Framework\PharmacyStore.Framework.csproj" />
     <ProjectReference Include="..\PharmacyStore.Models\PharmacyStore.Models.csproj" />
     <ProjectReference Include="..\PharmacyStore.Services\PharmacyStore.Services.csproj" />
   </ItemGroup>

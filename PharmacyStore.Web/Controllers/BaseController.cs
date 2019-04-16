@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using PharmacyStore.Framework.Filters;
 using PharmacyStore.Web.ViewModels;
 
 namespace PharmacyStore.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [ModelValidationFilter]
+    [Authorization("", "")]
+    [ExceptionFilter]
     public class BaseController : Controller
     {
         [NonAction]

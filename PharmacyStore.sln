@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28124.53
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28803.156
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyStore.Models", "PharmacyStore.Models\PharmacyStore.Models.csproj", "{01EF5A92-2AD1-4D95-B0D5-174A726DBF6E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyStore.Models", "PharmacyStore.Models\PharmacyStore.Models.csproj", "{01EF5A92-2AD1-4D95-B0D5-174A726DBF6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyStore.Services", "PharmacyStore.Services\PharmacyStore.Services.csproj", "{40BBA012-EB29-4845-8175-29E484ECA6AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyStore.Services", "PharmacyStore.Services\PharmacyStore.Services.csproj", "{40BBA012-EB29-4845-8175-29E484ECA6AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyStore.Web", "PharmacyStore.Web\PharmacyStore.Web.csproj", "{304DB116-0308-4498-8706-7E7941D0FB4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyStore.Web", "PharmacyStore.Web\PharmacyStore.Web.csproj", "{304DB116-0308-4498-8706-7E7941D0FB4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PharmacyStore.Framework", "PharmacyStore.Framework\PharmacyStore.Framework.csproj", "{2621EAB3-70D6-4A3F-980E-3B65809D2FC2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,8 +29,15 @@ Global
 		{304DB116-0308-4498-8706-7E7941D0FB4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{304DB116-0308-4498-8706-7E7941D0FB4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{304DB116-0308-4498-8706-7E7941D0FB4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2621EAB3-70D6-4A3F-980E-3B65809D2FC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2621EAB3-70D6-4A3F-980E-3B65809D2FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2621EAB3-70D6-4A3F-980E-3B65809D2FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2621EAB3-70D6-4A3F-980E-3B65809D2FC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8D6540CE-00F5-4F51-BCC6-3DE68CE66380}
 	EndGlobalSection
 EndGlobal
