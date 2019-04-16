@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace PharmacyStore.Web.Controllers
 {
-	[Route("api/[controller]")]
-	[ApiController]
+	
 	public class DoctorController : BaseController
     {
         private readonly IMapper _mapper;

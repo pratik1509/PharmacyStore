@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace PharmacyStore.Web.ViewModels
 {
-    public class ResultVm
+    public class ResultVm<T>
     {
         public bool IsSuccess { get; set; }
-        public object Data { get; set; }
+        public T Data { get; set; }
     }
 }

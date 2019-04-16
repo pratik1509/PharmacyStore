@@ -1,27 +1,26 @@
-﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
-using PharmacyStore.Services.abstractions;
-using PharmacyStore.Services.dto.DoctorDto;
-using PharmacyStore.Web.DoctorVm.ViewModels;
+﻿using Microsoft.AspNetCore.Mvc;
 using PharmacyStore.Web.ViewModels;
-using System.Threading.Tasks;
 
 namespace PharmacyStore.Web.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class BaseController : Controller
-    {      
-        public IActionResult Success<T>(T data)
+    {
+        [NonAction]
+        protected IActionResult Success<T>(T data)
         {
-            return Ok(new ResultVm
+            return Ok(new ResultVm<T>
             {
                 IsSuccess = true,
                 Data = data
             });
         }
 
-        public IActionResult Failure<T>(T error)
+        [NonAction]
+        private IActionResult Failure<T>(T error)
         {
-            return Ok(new ResultVm
+            return Ok(new ResultVm<T>
             {
                 IsSuccess = false,
                 Data = error
