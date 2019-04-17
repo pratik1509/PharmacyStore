@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
+using PharmacyStore.Framework.DependencyRegister;
 using PharmacyStore.Framework.Filters;
 using PharmacyStore.Web.ViewModels;
 
@@ -11,6 +14,14 @@ namespace PharmacyStore.Web.Controllers
     [ExceptionFilter]
     public class BaseController : Controller
     {
+        protected readonly IMapper _mapper;
+
+        public BaseController()
+        {
+            _mapper = DIEngineContext.ServiceProvider.GetRequiredService<IMapper>(); ;
+        }
+
+
         [NonAction]
         protected IActionResult Success<T>(T data)
         {

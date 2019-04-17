@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Common.Mongo.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using PharmacyStore.Framework.DependencyRegister;
 using PharmacyStore.Services;
+using PharmacyStore.Services.Abstraction;
 using PharmacyStore.Services.abstractions;
 using PharmacyStore.Web.Mapper.DoctorMapper;
 using Swashbuckle.AspNetCore.Swagger;
@@ -47,6 +49,11 @@ namespace PharmacyStore.Web
 			#endregion
 
 			services.AddSingleton(mapper);
+            
+            var mongoDbContext = new MongoDbContext(Configuration["AppSettings:DbConnectionString"], Configuration["AppSettings:DbName"]);
+            services.AddSingleton(typeof(IMongoDbContext), mongoDbContext);
+
+            services.AddSingleton<IUserClaimsService, UserClaimsService>();
 			services.AddSingleton<IDoctorServices, DoctorService>();
 
             DIEngineContext.ServiceProvider = services.BuildServiceProvider();

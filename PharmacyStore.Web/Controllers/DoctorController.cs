@@ -11,12 +11,10 @@ namespace PharmacyStore.Web.Controllers
 	
 	public class DoctorController : BaseController
     {
-        private readonly IMapper _mapper;
         private readonly IDoctorServices _doctorService;        
 
         public DoctorController(IMapper mapper, IDoctorServices doctorService)
         {
-            _mapper = mapper;
             _doctorService = doctorService;            
         }
 
