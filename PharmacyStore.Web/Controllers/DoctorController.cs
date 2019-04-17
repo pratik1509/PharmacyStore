@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace PharmacyStore.Web.Controllers
 {
-	
-	public class DoctorController : BaseController
-    {
-        private readonly IDoctorServices _doctorService;        
 
-        public DoctorController(IMapper mapper, IDoctorServices doctorService)
+    public class DoctorController : BaseController
+    {
+        private readonly IDoctorServices _doctorService;
+
+        public DoctorController(IDoctorServices doctorService)
         {
-            _doctorService = doctorService;            
+            _doctorService = doctorService;
         }
 
-		[HttpPost]
+        [HttpPost]
         public async Task<IActionResult> AddUpdateDoctor(AddUpdateDoctorVm addUpdateDoctorVm)
         {
             return Success(await _doctorService.AddUpdateDoctor(_mapper.Map<AddUpdateDoctorDto>(addUpdateDoctorVm)));
