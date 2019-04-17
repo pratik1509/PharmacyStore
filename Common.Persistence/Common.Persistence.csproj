@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="PdfManagement\DinkToPdfService.cs" />
+    <Compile Remove="PdfManagement\HiQPdfPdfService.cs" />
+    <Compile Remove="PdfManagement\ITextSharpPdfService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Jil" Version="2.16.0" />
+    <PackageReference Include="Microsoft.Azure.NotificationHubs" Version="2.0.2" />
+    <PackageReference Include="MongoDB.Driver" Version="2.7.2" />
+    <PackageReference Include="OpenTokCore" Version="1.0.1" />
+    <PackageReference Include="PusherServer" Version="4.1.0" />
+    <PackageReference Include="RestSharp" Version="106.5.4" />
+    <PackageReference Include="Select.HtmlToPdf.NetCore" Version="18.4.0" />
+    <PackageReference Include="Sendgrid" Version="9.10.0" />
+    <PackageReference Include="Serilog" Version="2.7.1" />
+    <PackageReference Include="Serilog.Extensions.Logging" Version="2.0.2" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
+    <PackageReference Include="Serilog.Sinks.RollingFile" Version="3.3.0" />
+    <PackageReference Include="Stripe.net" Version="21.4.1" />
+    <PackageReference Include="Twilio" Version="5.22.0" />
+    <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
+  </ItemGroup>
+
+</Project>

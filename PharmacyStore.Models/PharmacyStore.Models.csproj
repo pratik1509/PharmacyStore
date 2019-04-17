@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Source\repos\Video1\Common.Mongo.Respository\Common.Mongo.Respository.csproj" />
+    <ProjectReference Include="..\Common.Mongo.Respository\Common.Mongo.Respository.csproj" />
   </ItemGroup>
 
 </Project>

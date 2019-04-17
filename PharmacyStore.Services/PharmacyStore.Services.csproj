@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Source\repos\Video1\Common.Mongo.Respository\Common.Mongo.Respository.csproj" />
     <ProjectReference Include="..\PharmacyStore.Models\PharmacyStore.Models.csproj" />
   </ItemGroup>
 

@@ -13,9 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PharmacyStore.Framework", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{2644E8E0-90F2-47E9-B24E-AD5ACDD7BB5D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Mongo.Respository", "..\..\Source\repos\Video1\Common.Mongo.Respository\Common.Mongo.Respository.csproj", "{8B9867C7-499E-4DAD-A63D-1B1F4F13D100}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Mongo.Respository", "Common.Mongo.Respository\Common.Mongo.Respository.csproj", "{0DF72AD9-78E2-42F8-B732-FADFB1FD73B7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Persistence", "..\..\Source\repos\Video1\Common.Persistence\Common.Persistence.csproj", "{267ED055-D25C-47F1-9803-D6D77BCCEB38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common.Persistence", "Common.Persistence\Common.Persistence.csproj", "{9B277F5C-A81F-453E-B514-7A669B0887BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,21 +39,21 @@ Global
 		{2621EAB3-70D6-4A3F-980E-3B65809D2FC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2621EAB3-70D6-4A3F-980E-3B65809D2FC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2621EAB3-70D6-4A3F-980E-3B65809D2FC2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8B9867C7-499E-4DAD-A63D-1B1F4F13D100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8B9867C7-499E-4DAD-A63D-1B1F4F13D100}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8B9867C7-499E-4DAD-A63D-1B1F4F13D100}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8B9867C7-499E-4DAD-A63D-1B1F4F13D100}.Release|Any CPU.Build.0 = Release|Any CPU
-		{267ED055-D25C-47F1-9803-D6D77BCCEB38}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{267ED055-D25C-47F1-9803-D6D77BCCEB38}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{267ED055-D25C-47F1-9803-D6D77BCCEB38}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{267ED055-D25C-47F1-9803-D6D77BCCEB38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DF72AD9-78E2-42F8-B732-FADFB1FD73B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DF72AD9-78E2-42F8-B732-FADFB1FD73B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DF72AD9-78E2-42F8-B732-FADFB1FD73B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DF72AD9-78E2-42F8-B732-FADFB1FD73B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B277F5C-A81F-453E-B514-7A669B0887BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B277F5C-A81F-453E-B514-7A669B0887BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B277F5C-A81F-453E-B514-7A669B0887BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B277F5C-A81F-453E-B514-7A669B0887BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{8B9867C7-499E-4DAD-A63D-1B1F4F13D100} = {2644E8E0-90F2-47E9-B24E-AD5ACDD7BB5D}
-		{267ED055-D25C-47F1-9803-D6D77BCCEB38} = {2644E8E0-90F2-47E9-B24E-AD5ACDD7BB5D}
+		{0DF72AD9-78E2-42F8-B732-FADFB1FD73B7} = {2644E8E0-90F2-47E9-B24E-AD5ACDD7BB5D}
+		{9B277F5C-A81F-453E-B514-7A669B0887BD} = {2644E8E0-90F2-47E9-B24E-AD5ACDD7BB5D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8D6540CE-00F5-4F51-BCC6-3DE68CE66380}
