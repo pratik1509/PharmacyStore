@@ -1,8 +1,10 @@
+using Common.Mongo.Repository;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace PharmacyStore.Models
 {
+    [CollectionName("Medicines")]
     public class Medicine : BaseModel
     {
         [BsonId]

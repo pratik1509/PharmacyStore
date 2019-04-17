@@ -1,9 +1,11 @@
 using System.Collections.Generic;
+using Common.Mongo.Repository;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace PharmacyStore.Models
 {
+    [CollectionName("Purchases")]
     public class Purchase : BaseModel
     {
         [BsonId]

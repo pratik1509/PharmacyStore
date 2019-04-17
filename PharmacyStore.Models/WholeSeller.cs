@@ -1,5 +1,8 @@
+using Common.Mongo.Repository;
+
 namespace PharmacyStore.Models
 {
+    [CollectionName("WholeSellers")]
     public class WholeSeller : BaseModel {
         public string Name { get; set; }
         public string Address { get; set; }
