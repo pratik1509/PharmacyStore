@@ -7,7 +7,7 @@ using PharmacyStore.Web.ViewModels;
 
 namespace PharmacyStore.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     [ModelValidationFilter]
     [Authorization("", "")]

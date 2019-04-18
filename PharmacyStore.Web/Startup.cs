@@ -40,7 +40,7 @@ namespace PharmacyStore.Web
         {
             services.AddMvc(opt =>
                 {
-                    opt.Filters.Add(typeof(ModelValidationFilter));
+                    //opt.Filters.Add(typeof(ModelValidationFilter));
                 })
             .AddFluentValidation(fv =>
             {

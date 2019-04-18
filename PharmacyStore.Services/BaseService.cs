@@ -1,17 +1,19 @@
 ﻿using Common.Mongo.Repository;
+using Microsoft.Extensions.DependencyInjection;
+using PharmacyStore.Framework.DependencyRegister;
 using PharmacyStore.Services.Abstraction;
 
 namespace PharmacyStore.Services
 {
     public class BaseService : BaseMongoRepository
     {
-        private readonly IMongoDbContext _db;
-        private readonly IUserClaimsService _userClaims;
+        protected readonly IMongoDbContext _db;
+        protected readonly IUserClaimsService _userClaims;
 
-        public BaseService(IMongoDbContext db, IUserClaimsService userClaims) : base(db)
+        public BaseService() : base(DIEngineContext.ServiceProvider.GetRequiredService<IMongoDbContext>())
         {
-            _db = db;
-            _userClaims = userClaims;
+            _db = DIEngineContext.ServiceProvider.GetRequiredService<IMongoDbContext>();
+            _userClaims = DIEngineContext.ServiceProvider.GetRequiredService<IUserClaimsService>();
         }
     }
 }

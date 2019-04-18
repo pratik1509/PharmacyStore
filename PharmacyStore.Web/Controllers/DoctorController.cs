@@ -8,14 +8,13 @@ using System.Threading.Tasks;
 
 namespace PharmacyStore.Web.Controllers
 {
-    [Route("api/[controller]/[action]")]
     public class DoctorController : BaseController
     {
-        private readonly IDoctorServices _doctorService;        
+        private readonly IDoctorServices _doctorService;
 
-        public DoctorController(IMapper mapper, IDoctorServices doctorService)
+        public DoctorController(IDoctorServices doctorService)
         {
-            _doctorService = doctorService;            
+            _doctorService = doctorService;
         }
 
         [HttpGet]

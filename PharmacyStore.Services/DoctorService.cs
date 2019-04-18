@@ -11,14 +11,6 @@ namespace PharmacyStore.Services
 {
     public class DoctorService : BaseService, IDoctorServices
     {
-        private readonly IMongoDbContext _db;
-        private readonly IUserClaimsService _userClaims;
-
-        public DoctorService(IMongoDbContext db, IUserClaimsService userClaims) : base(db, userClaims)
-        {
-            _db = db;
-            _userClaims = userClaims;
-        }
 
         public async Task<DoctorDto> Get(string doctorId)
         {

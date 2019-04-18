@@ -13,14 +13,6 @@ namespace PharmacyStore.Services
 {
     public class MedicineCategoryService : BaseService, IMedicineCategoryService
     {
-        private readonly IMongoDbContext _db;
-        private readonly IUserClaimsService _userClaims;
-
-        public MedicineCategoryService(IMongoDbContext db, IUserClaimsService userClaims) : base(db, userClaims)
-        {
-            _db = db;
-            _userClaims = userClaims;
-        }
 
         public Task<MedicineCategory> GetDetail(string id)
         {
