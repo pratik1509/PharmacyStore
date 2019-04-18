@@ -18,6 +18,9 @@ using PharmacyStore.Services.Abstraction;
 using PharmacyStore.Services.abstractions;
 using PharmacyStore.Web.Mapper.DoctorMapper;
 using Swashbuckle.AspNetCore.Swagger;
+using FluentValidation.AspNetCore;
+using PharmacyStore.Web.DoctorVm.ViewModels;
+using PharmacyStore.Framework.Filters;
 
 namespace PharmacyStore.Web
 {
@@ -33,46 +36,56 @@ namespace PharmacyStore.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc(opt =>
+                {
+                    opt.Filters.Add(typeof(ModelValidationFilter));
+                })
+            .AddFluentValidation(fv =>
+            {
+                fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+                fv.RegisterValidatorsFromAssemblyContaining<AddUpdateDoctorVmValidator>();
+            });
 
-			#region mapper configuration
+            #region mapper configuration
 
-			// Auto Mapper Configurations
-			var mappingConfig = new MapperConfiguration(mc =>
-			{
-				//add all your mapper profiles here
-				mc.AddProfile(new DoctorMapper());
-			});
+            // Auto Mapper Configurations
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                //add all your mapper profiles here
+                mc.AddProfile(new DoctorMapper());
+            });
 
-			IMapper mapper = mappingConfig.CreateMapper();
+            IMapper mapper = mappingConfig.CreateMapper();
 
-			#endregion
+            #endregion
 
-			services.AddSingleton(mapper);
-            
+            services.AddSingleton(mapper);
+
             var mongoDbContext = new MongoDbContext(Configuration["AppSettings:DbConnectionString"], Configuration["AppSettings:DbName"]);
             services.AddSingleton(typeof(IMongoDbContext), mongoDbContext);
 
             services.AddSingleton<IUserClaimsService, UserClaimsService>();
-			services.AddSingleton<IDoctorServices, DoctorService>();
+            services.AddSingleton<IDoctorServices, DoctorService>();
 
             DIEngineContext.ServiceProvider = services.BuildServiceProvider();
 
             #region swagger settings
 
             services.AddSwaggerGen(c =>
-			{
-				c.SwaggerDoc("v1", new Info
-				{
-					Version = "v1",
-					Title = "Pharmacy store API",
-					Description = "Pharmacy store project"					
-				});
+            {
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "Pharmacy store API",
+                    Description = "Pharmacy store project"
+                });
 
-			});
+                c.AddFluentValidationRules();
 
-			#endregion
-		}
+            });
+
+            #endregion
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -86,15 +99,15 @@ namespace PharmacyStore.Web
                 app.UseHsts();
             }
 
-			//swagger settings to enable authorization in swagger
-			app.UseSwagger();
+            //swagger settings to enable authorization in swagger
+            app.UseSwagger();
 
-			app.UseSwaggerUI(c =>
-			{
-				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pharmacy store API V1");
-			});
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Pharmacy store API V1");
+            });
 
-			app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
