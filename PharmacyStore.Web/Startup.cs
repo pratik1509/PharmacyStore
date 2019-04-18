@@ -21,8 +21,8 @@ using PharmacyStore.Web.Helpers;
 using PharmacyStore.Web.Mapper.DoctorMapper;
 using Swashbuckle.AspNetCore.Swagger;
 using FluentValidation.AspNetCore;
-using PharmacyStore.Web.DoctorVm.ViewModels;
 using PharmacyStore.Framework.Filters;
+using PharmacyStore.Web.Doctor.ViewModels;
 
 namespace PharmacyStore.Web
 {
@@ -45,7 +45,7 @@ namespace PharmacyStore.Web
             .AddFluentValidation(fv =>
             {
                 fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
-                fv.RegisterValidatorsFromAssemblyContaining<AddUpdateDoctorVmValidator>();
+                fv.RegisterValidatorsFromAssemblyContaining<Startup>();
             });
 
             #region mapper configuration
@@ -63,15 +63,19 @@ namespace PharmacyStore.Web
 
             services.AddSingleton(mapper);
 
-            var mongoDbContext = new MongoDbContext(Configuration["AppSettings:DbConnectionString"], Configuration["AppSettings:DbName"]);
-            services.AddSingleton(typeof(IMongoDbContext), mongoDbContext);
-
-            services.AddSingleton<IUserClaimsService, UserClaimsService>();
-			services.AddSingleton<IDoctorServices, DoctorService>();
-            
             // httpcontext for userclaims
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IUserClaimsService, UserClaims>();
+
+            services.AddSingleton<IMongoDbContext>(x =>
+            new MongoDbContext(Configuration["Database:ConnectionString"], Configuration["Database:Database"]));
+
+            #region Domain Services
+
+            services.AddSingleton<IUserClaimsService, UserClaimsService>();
+            services.AddSingleton<IDoctorServices, DoctorService>();
+
+            #endregion
 
             DIEngineContext.ServiceProvider = services.BuildServiceProvider();
 
@@ -91,9 +95,7 @@ namespace PharmacyStore.Web
             });
 
             //mongo repository
-            services.AddSingleton<Common.Mongo.Repository.IMongoDbContext>(x =>
-            new Common.Mongo.Repository.MongoDbContext(Configuration["Database:ConnectionString"],
-            Configuration["Database:Database"]));
+
 
             #endregion
         }

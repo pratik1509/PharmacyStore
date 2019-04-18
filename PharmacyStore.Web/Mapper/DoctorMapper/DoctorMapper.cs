@@ -10,6 +10,6 @@ namespace PharmacyStore.Web.Mapper.DoctorMapper
         {
             CreateMap<DoctorDto, DoctorVm>();
             CreateMap<AddUpdateDoctorVm, AddUpdateDoctorDto>();
-        }        
+        }
     }
 }
