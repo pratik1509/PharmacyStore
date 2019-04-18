@@ -1,6 +1,6 @@
-﻿namespace PharmacyStore.Services.dto.DoctorDto
+﻿namespace PharmacyStore.Web.Doctor.ViewModels
 {
-    public class AddUpdateDoctorDto
+    public class AddUpdateDoctorVm
     {
         public string DoctorId { get; set; }
         public string DoctorName { get; set; }

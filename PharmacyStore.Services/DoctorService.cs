@@ -5,6 +5,7 @@ using PharmacyStore.Services.abstractions;
 using PharmacyStore.Services.dto.DoctorDto;
 using Common.Mongo.Repository;
 using PharmacyStore.Services.Abstraction;
+using MongoDB.Driver;
 
 namespace PharmacyStore.Services
 {
@@ -19,7 +20,43 @@ namespace PharmacyStore.Services
             _userClaims = userClaims;
         }
 
-        public async Task<string> AddUpdateDoctor(AddUpdateDoctorDto doctorDto)
+        public async Task<DoctorDto> Get(string doctorId)
+        {
+            #region filter
+
+            var filter = new FilterDefinitionBuilder<Doctor>();
+            var filterDefination = filter.Empty;
+
+            filterDefination = filterDefination
+                & filter.Eq(x => x.Id, doctorId);
+
+            #endregion
+
+            return await GetOneAndProjectAsync(filterDefination, x => new DoctorDto
+            {
+                DoctorName = x.DoctorName,
+                Address = x.Address
+            });
+        }
+
+        public async Task<List<DoctorDto>> GetAll()
+        {
+            // filter is empty because we need all data
+            #region filter
+
+            var filter = new FilterDefinitionBuilder<Doctor>();
+            var filterDefination = filter.Empty;
+
+            #endregion
+
+            return await FindAndProjectAsync(filterDefination, x => new DoctorDto
+            {
+                DoctorName = x.DoctorName,
+                Address = x.Address
+            });
+        }
+
+        public async Task<string> Create(AddUpdateDoctorDto doctorDto)
         {
             return await AddOneAsync(new Doctor
             {
@@ -28,19 +65,22 @@ namespace PharmacyStore.Services
             }, _userClaims.Id);
         }
 
-        public Task<bool> DeleteDoctor(string doctorId)
+        public async Task<bool> Update(AddUpdateDoctorDto doctorDto)
         {
-            throw new System.NotImplementedException();
+            #region update filter
+
+            var updateFilter = Builders<Doctor>.Update
+                    .Set(x => x.DoctorName, doctorDto.DoctorName)
+                    .Set(x => x.Address, doctorDto.Address);
+
+            #endregion
+
+            return await UpdateOneAsync(doctorDto.DoctorId, updateFilter, _userClaims.Id);
         }
 
-        public Task<Doctor> GetDoctorDetail(string doctorId)
+        public async Task<bool> Delete(string doctorId)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public Task<List<Doctor>> GetDoctorsList()
-        {
-            throw new System.NotImplementedException();
+            return await DeleteOneAsync<Doctor>(x => x.Id == doctorId, _userClaims.Id);
         }
     }
 }

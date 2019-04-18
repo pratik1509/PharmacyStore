@@ -7,9 +7,10 @@ namespace PharmacyStore.Services.abstractions
 {
     public interface IDoctorServices
     {
-        Task<string> AddUpdateDoctor(AddUpdateDoctorDto doctor);
-        Task<bool> DeleteDoctor(string doctorId);
-        Task<Doctor> GetDoctorDetail(string doctorId);
-        Task<List<Doctor>> GetDoctorsList();
+        Task<DoctorDto> Get(string doctorId);
+        Task<List<DoctorDto>> GetAll();
+        Task<string> Create(AddUpdateDoctorDto doctor);
+        Task<bool> Update(AddUpdateDoctorDto doctor);
+        Task<bool> Delete(string doctorId);        
     }
 }
