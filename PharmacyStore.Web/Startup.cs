@@ -6,6 +6,7 @@ using AutoMapper;
 using Common.Mongo.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +17,7 @@ using PharmacyStore.Framework.DependencyRegister;
 using PharmacyStore.Services;
 using PharmacyStore.Services.Abstraction;
 using PharmacyStore.Services.abstractions;
+using PharmacyStore.Web.Helpers;
 using PharmacyStore.Web.Mapper.DoctorMapper;
 using Swashbuckle.AspNetCore.Swagger;
 using FluentValidation.AspNetCore;
@@ -65,7 +67,11 @@ namespace PharmacyStore.Web
             services.AddSingleton(typeof(IMongoDbContext), mongoDbContext);
 
             services.AddSingleton<IUserClaimsService, UserClaimsService>();
-            services.AddSingleton<IDoctorServices, DoctorService>();
+			services.AddSingleton<IDoctorServices, DoctorService>();
+            
+            // httpcontext for userclaims
+            services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddTransient<IUserClaimsService, UserClaims>();
 
             DIEngineContext.ServiceProvider = services.BuildServiceProvider();
 
@@ -83,6 +89,11 @@ namespace PharmacyStore.Web
                 c.AddFluentValidationRules();
 
             });
+
+            //mongo repository
+            services.AddSingleton<Common.Mongo.Repository.IMongoDbContext>(x =>
+            new Common.Mongo.Repository.MongoDbContext(Configuration["Database:ConnectionString"],
+            Configuration["Database:Database"]));
 
             #endregion
         }
