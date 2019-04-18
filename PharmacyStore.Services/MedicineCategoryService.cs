@@ -1,4 +1,5 @@
 ﻿using Common.Mongo.Repository;
+using MongoDB.Driver;
 using PharmacyStore.Framework.Pagging;
 using PharmacyStore.Models;
 using PharmacyStore.Services.Abstraction;
@@ -14,36 +15,65 @@ namespace PharmacyStore.Services
     public class MedicineCategoryService : BaseService, IMedicineCategoryService
     {
 
-        public Task<MedicineCategory> GetDetail(string id)
+        public async Task<MedicineCategoryDto> Get(string id)
         {
-            throw new System.NotImplementedException();
+            #region filter
+
+            var filter = new FilterDefinitionBuilder<MedicineCategory>();
+            var filterDefination = filter.Empty;
+
+            filterDefination = filterDefination
+                & filter.Eq(x => x.Id, id);
+
+            #endregion
+
+            return await GetOneAndProjectAsync(filterDefination, x => new MedicineCategoryDto
+            {
+                Id = x.Id,
+                Category = x.Category,
+            });
         }
-        public Task<IPagedList<MedicineCategory>> GeList(PagingModel paging)
+
+        public async Task<List<MedicineCategoryDto>> GetAll()
         {
-            throw new System.NotImplementedException();
+            // filter is empty because we need all data
+            #region filter
+
+            var filter = new FilterDefinitionBuilder<MedicineCategory>();
+            var filterDefination = filter.Empty;
+
+            #endregion
+
+            return await FindAndProjectAsync(filterDefination, x => new MedicineCategoryDto
+            {
+                Id = x.Id,
+                Category = x.Category,
+            });
         }
 
         public async Task<string> Create(AddUpdateMedicineCategoryDto dto)
         {
             return await AddOneAsync(new MedicineCategory
             {
-                Category = dto.Category
+                Category = dto.Category,
             }, _userClaims.Id);
         }
 
-        public async Task<string> Update(AddUpdateMedicineCategoryDto dto)
+        public async Task<bool> Update(AddUpdateMedicineCategoryDto dto)
         {
-            //return await UpdateOneAsync(new MedicineCategory
-            //{
-            //    Category = dto.Category
-            //}, _userClaims.Id);
-            return null;
+            #region update filter
+
+            var updateFilter = Builders<MedicineCategory>.Update
+                    .Set(x => x.Category, dto.Category);
+
+            #endregion
+
+            return await UpdateOneAsync(dto.Id, updateFilter, _userClaims.Id);
         }
 
-        public Task<bool> Delete(string id)
+        public async Task<bool> Delete(string id)
         {
-            throw new System.NotImplementedException();
+            return await DeleteOneAsync<MedicineCategory>(x => x.Id == id, _userClaims.Id);
         }
-
     }
 }

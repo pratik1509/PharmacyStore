@@ -9,7 +9,7 @@ using MongoDB.Driver;
 
 namespace PharmacyStore.Services
 {
-    public class DoctorService : BaseService, IDoctorServices
+    public class DoctorService : BaseService, IDoctorService
     {
 
         public async Task<DoctorDto> Get(string doctorId)

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PharmacyStore.Services.abstractions
 {
-    public interface IDoctorServices
+    public interface IDoctorService
     {
         Task<DoctorDto> Get(string doctorId);
         Task<List<DoctorDto>> GetAll();

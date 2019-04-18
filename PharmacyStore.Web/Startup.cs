@@ -18,11 +18,11 @@ using PharmacyStore.Services;
 using PharmacyStore.Services.Abstraction;
 using PharmacyStore.Services.abstractions;
 using PharmacyStore.Web.Helpers;
-using PharmacyStore.Web.Mapper.DoctorMapper;
 using Swashbuckle.AspNetCore.Swagger;
 using FluentValidation.AspNetCore;
 using PharmacyStore.Framework.Filters;
 using PharmacyStore.Web.Doctor.ViewModels;
+using PharmacyStore.Web.Mapper;
 
 namespace PharmacyStore.Web
 {
@@ -54,7 +54,7 @@ namespace PharmacyStore.Web
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 //add all your mapper profiles here
-                mc.AddProfile(new DoctorMapper());
+                mc.AddProfile(new MapperConfigurations());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();
@@ -72,8 +72,8 @@ namespace PharmacyStore.Web
 
             #region Domain Services
 
-            services.AddSingleton<IUserClaimsService, UserClaimsService>();
-            services.AddSingleton<IDoctorServices, DoctorService>();
+            services.AddSingleton<IDoctorService, DoctorService>();
+            services.AddSingleton<IMedicineCategoryService, MedicineCategoryService>();
 
             #endregion
 

@@ -10,17 +10,17 @@ namespace PharmacyStore.Web.Controllers
 {
     public class DoctorController : BaseController
     {
-        private readonly IDoctorServices _doctorService;
+        private readonly IDoctorService _doctorService;
 
-        public DoctorController(IDoctorServices doctorService)
+        public DoctorController(IDoctorService doctorService)
         {
             _doctorService = doctorService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Get(string doctorId)
+        public async Task<IActionResult> Get(string id)
         {
-            return Success(_mapper.Map<DoctorVm>(await _doctorService.Get(doctorId)));
+            return Success(_mapper.Map<DoctorVm>(await _doctorService.Get(id)));
         }
 
         [HttpGet]
@@ -30,21 +30,21 @@ namespace PharmacyStore.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(AddUpdateDoctorVm addUpdateDoctorVm)
+        public async Task<IActionResult> Create(AddUpdateDoctorVm model)
         {
-            return Success(await _doctorService.Create(_mapper.Map<AddUpdateDoctorDto>(addUpdateDoctorVm)));
+            return Success(await _doctorService.Create(_mapper.Map<AddUpdateDoctorDto>(model)));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Update(AddUpdateDoctorVm addUpdateDoctorVm)
+        public async Task<IActionResult> Update(AddUpdateDoctorVm model)
         {
-            return Success(await _doctorService.Update(_mapper.Map<AddUpdateDoctorDto>(addUpdateDoctorVm)));
+            return Success(await _doctorService.Update(_mapper.Map<AddUpdateDoctorDto>(model)));
         }
 
         [HttpPost]
-        public async Task<IActionResult> Delete(string doctorId)
+        public async Task<IActionResult> Delete(string id)
         {
-            return Success(await _doctorService.Delete(doctorId));
+            return Success(await _doctorService.Delete(id));
         }
     }
 }

@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ViewModels\MedicineCategory\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
