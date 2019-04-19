@@ -73,6 +73,7 @@ namespace PharmacyStore.Web
             // httpcontext for userclaims
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IUserClaimsService, UserClaims>();
+            //services.AddTransient<IEncryptionService, EncryptionService>();
 
             services.AddSingleton<IMongoDbContext>(x =>
             new MongoDbContext(Configuration["Database:ConnectionString"], Configuration["Database:Database"]));
