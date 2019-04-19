@@ -48,9 +48,11 @@ namespace PharmacyStore.Web
                 })
             .AddFluentValidation(fv =>
             {
-                fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+               // fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
                 fv.RegisterValidatorsFromAssemblyContaining<Startup>();
             });
+
+            services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
 
             services.AddAuthentication(x =>
             {
