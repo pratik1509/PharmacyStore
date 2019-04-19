@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Common.Persistence\Common.Persistence.csproj" />
     <ProjectReference Include="..\PharmacyStore.Framework\PharmacyStore.Framework.csproj" />
     <ProjectReference Include="..\PharmacyStore.Models\PharmacyStore.Models.csproj" />
     <ProjectReference Include="..\PharmacyStore.Services\PharmacyStore.Services.csproj" />

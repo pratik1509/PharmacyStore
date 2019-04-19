@@ -26,6 +26,7 @@ using PharmacyStore.Web.Mapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using PharmacyStore.Framework;
 using PharmacyStore.Web.Middleware;
+using Common.Persistence.SecurityManagement;
 
 namespace PharmacyStore.Web
 {
@@ -75,7 +76,7 @@ namespace PharmacyStore.Web
             // httpcontext for userclaims
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IUserClaimsService, UserClaims>();
-            //services.AddTransient<IEncryptionService, EncryptionService>();
+            services.AddTransient<IEncryptionService, EncryptionService>();
 
             #region request response logger
             
