@@ -13,7 +13,7 @@ namespace PharmacyStore.Web.Controllers
     [ModelValidationFilter]
     [Authorization("", "")]
     [ExceptionFilter]
-    public class BaseController : Controller
+    public class BaseController : ControllerBase
     {
         protected readonly IMapper _mapper;
 

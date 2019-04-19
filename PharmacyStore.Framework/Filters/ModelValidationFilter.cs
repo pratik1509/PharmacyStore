@@ -7,7 +7,6 @@ namespace PharmacyStore.Framework.Filters
 {
     public class ModelValidationFilter : ActionFilterAttribute
     {
-
         /// <summary>
         /// 
         /// </summary>

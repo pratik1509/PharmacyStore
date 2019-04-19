@@ -24,6 +24,8 @@ using PharmacyStore.Framework.Filters;
 using PharmacyStore.Web.Doctor.ViewModels;
 using PharmacyStore.Web.Mapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using PharmacyStore.Framework;
+using PharmacyStore.Web.Middleware;
 
 namespace PharmacyStore.Web
 {
@@ -74,6 +76,14 @@ namespace PharmacyStore.Web
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IUserClaimsService, UserClaims>();
             //services.AddTransient<IEncryptionService, EncryptionService>();
+
+            #region request response logger
+            
+            //request response logger 
+            services.AddScoped<IWorkContext, WebWorkContext>();
+            services.AddSingleton<IRequestResponseLoggerService, RequestResponseLoggerService>();
+
+            #endregion
 
             services.AddSingleton<IMongoDbContext>(x =>
             new MongoDbContext(Configuration["Database:ConnectionString"], Configuration["Database:Database"]));
@@ -137,6 +147,7 @@ namespace PharmacyStore.Web
             });
 
             app.UseHttpsRedirection();
+            app.UseMiddleware<RequestResponseLoggingMiddleware>();
             app.UseMvc();
         }
     }
