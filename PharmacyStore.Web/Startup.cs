@@ -23,6 +23,8 @@ using FluentValidation.AspNetCore;
 using PharmacyStore.Framework.Filters;
 using PharmacyStore.Web.Doctor.ViewModels;
 using PharmacyStore.Web.Mapper;
+using PharmacyStore.Framework;
+using PharmacyStore.Web.Middleware;
 
 namespace PharmacyStore.Web
 {
@@ -66,6 +68,14 @@ namespace PharmacyStore.Web
             // httpcontext for userclaims
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IUserClaimsService, UserClaims>();
+
+            #region request response logger
+            
+            //request response logger 
+            services.AddScoped<IWorkContext, WebWorkContext>();
+            services.AddSingleton<IRequestResponseLoggerService, RequestResponseLoggerService>();
+
+            #endregion
 
             services.AddSingleton<IMongoDbContext>(x =>
             new MongoDbContext(Configuration["Database:ConnectionString"], Configuration["Database:Database"]));
@@ -121,6 +131,7 @@ namespace PharmacyStore.Web
             });
 
             app.UseHttpsRedirection();
+            app.UseMiddleware<RequestResponseLoggingMiddleware>();
             app.UseMvc();
         }
     }
