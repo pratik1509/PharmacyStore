@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using PharmacyStore.Framework;
 using PharmacyStore.Framework.DependencyRegister;
 using PharmacyStore.Framework.Filters;
 using PharmacyStore.Web.ViewModels;
@@ -33,7 +34,7 @@ namespace PharmacyStore.Web.Controllers
         }
 
         [NonAction]
-        private IActionResult Failure<T>(T error)
+        protected IActionResult Failure<T>(T error)
         {
             return Ok(new ResultVm<T>
             {

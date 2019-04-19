@@ -23,6 +23,7 @@ using FluentValidation.AspNetCore;
 using PharmacyStore.Framework.Filters;
 using PharmacyStore.Web.Doctor.ViewModels;
 using PharmacyStore.Web.Mapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using PharmacyStore.Framework;
 using PharmacyStore.Web.Middleware;
 
@@ -48,6 +49,12 @@ namespace PharmacyStore.Web
             {
                 fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
                 fv.RegisterValidatorsFromAssemblyContaining<Startup>();
+            });
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             });
 
             #region mapper configuration
@@ -101,6 +108,14 @@ namespace PharmacyStore.Web
                 });
 
                 c.AddFluentValidationRules();
+
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme()
+                {
+                    Description = "Authorization header using the Bearer scheme",
+                    Name = "Authorization",
+                    In = "header",
+                    //Type="ApiKey"
+                });
 
             });
 

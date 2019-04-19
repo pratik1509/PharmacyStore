@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PharmacyStore.Services.abstractions;
 using PharmacyStore.Services.dto.DoctorDto;
@@ -17,6 +18,7 @@ namespace PharmacyStore.Web.Controllers
             _doctorService = doctorService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Get(string id)
         {
