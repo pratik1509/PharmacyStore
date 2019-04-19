@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PharmacyStore.Web.ViewModels
+namespace PharmacyStore.Framework
 {
     public class ResultVm<T>
     {
