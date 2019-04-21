@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MedicineService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\PharmacyStore.Framework\PharmacyStore.Framework.csproj" />
     <ProjectReference Include="..\PharmacyStore.Models\PharmacyStore.Models.csproj" />
   </ItemGroup>
