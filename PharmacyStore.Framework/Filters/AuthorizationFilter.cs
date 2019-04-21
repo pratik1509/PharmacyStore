@@ -1,9 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using System.Text;
+using System.Linq;
+using System.Net;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Controllers;
 
 namespace PharmacyStore.Framework.Filters
 {
@@ -26,11 +31,36 @@ namespace PharmacyStore.Framework.Filters
 
         public void OnAuthorization(AuthorizationFilterContext context)
         {
-            //var hasClaim = context.HttpContext.User.Claims.Any(c => c.Type == _claim.Type && c.Value == _claim.Value);
-            //if (!hasClaim)
-            //{
-            //    context.Result = new ForbidResult();
-            //}
+            string authorizationTokenValue = string.Empty;
+            StringValues authorizationTokenValues;
+            if (context.HttpContext.Request.Headers.TryGetValue(SystemConstants.AuthorizationTokenKey, out authorizationTokenValues))
+            {
+                authorizationTokenValue = authorizationTokenValues.FirstOrDefault();
+            }
+
+
+            var controllerActionDescriptor = context.ActionDescriptor as ControllerActionDescriptor;
+            if (controllerActionDescriptor != null)
+            {
+                bool allowedAllowAnonymousAttribute = controllerActionDescriptor.MethodInfo.GetCustomAttributes(typeof(AllowAnonymousAttribute), inherit: true).Any();
+                if(allowedAllowAnonymousAttribute)
+                {
+                    return;
+                }
+            }
+
+           ////  check header value
+           // if (string.IsNullOrEmpty(authorizationTokenValue))
+           // {
+           //     context.Result = new UnauthorizedObjectResult(new ResultVm<string>() { Data = "Missing Authorization-Token" });
+           //     return;
+           // }
+
+            //decrypt token
+
+            //Serailize token
+
+            //Validate token
         }
     }
 }

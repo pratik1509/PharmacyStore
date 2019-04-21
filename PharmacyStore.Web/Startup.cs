@@ -23,6 +23,10 @@ using FluentValidation.AspNetCore;
 using PharmacyStore.Framework.Filters;
 using PharmacyStore.Web.Doctor.ViewModels;
 using PharmacyStore.Web.Mapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using PharmacyStore.Framework;
+using PharmacyStore.Web.Middleware;
+using Common.Persistence.SecurityManagement;
 
 namespace PharmacyStore.Web
 {
@@ -44,8 +48,16 @@ namespace PharmacyStore.Web
                 })
             .AddFluentValidation(fv =>
             {
-                fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+               // fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
                 fv.RegisterValidatorsFromAssemblyContaining<Startup>();
+            });
+
+            services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
+
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             });
 
             #region mapper configuration
@@ -66,6 +78,15 @@ namespace PharmacyStore.Web
             // httpcontext for userclaims
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IUserClaimsService, UserClaims>();
+            services.AddTransient<IEncryptionService, EncryptionService>();
+
+            #region request response logger
+            
+            //request response logger 
+            services.AddScoped<IWorkContext, WebWorkContext>();
+            services.AddSingleton<IRequestResponseLoggerService, RequestResponseLoggerService>();
+
+            #endregion
 
             services.AddSingleton<IMongoDbContext>(x =>
             new MongoDbContext(Configuration["Database:ConnectionString"], Configuration["Database:Database"]));
@@ -92,6 +113,14 @@ namespace PharmacyStore.Web
                 });
 
                 c.AddFluentValidationRules();
+
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme()
+                {
+                    Description = "Authorization header using the Bearer scheme",
+                    Name = "Authorization",
+                    In = "header",
+                    //Type="ApiKey"
+                });
 
             });
 
@@ -122,6 +151,7 @@ namespace PharmacyStore.Web
             });
 
             app.UseHttpsRedirection();
+            app.UseMiddleware<RequestResponseLoggingMiddleware>();
             app.UseMvc();
         }
     }

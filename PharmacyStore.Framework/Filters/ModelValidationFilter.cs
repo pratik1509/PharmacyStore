@@ -2,12 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 
 namespace PharmacyStore.Framework.Filters
 {
     public class ModelValidationFilter : ActionFilterAttribute
     {
-
         /// <summary>
         /// 
         /// </summary>
@@ -16,9 +17,10 @@ namespace PharmacyStore.Framework.Filters
         {
             if (!actionContext.ModelState.IsValid)
             {
+                var errors = actionContext.ModelState.Values.SelectMany(x => x.Errors).ToList();
                 //var Errors = WebHelper.GetCustomModelErrores(actionContext.ModelState);
-                //var result = new BadRequestObjectResult(Errors);
-                //actionContext.Result = result;
+                var result = new BadRequestObjectResult(new ResultVm<object> { Data = errors });
+                actionContext.Result = result;
             }
         }
     }
