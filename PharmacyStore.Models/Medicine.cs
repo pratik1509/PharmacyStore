@@ -7,14 +7,14 @@ namespace PharmacyStore.Models
     [CollectionName("Medicines")]
     public class Medicine : BaseModel
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        //[BsonId]
+        //[BsonRepresentation(BsonType.ObjectId)]
         public string ScheduleCategoryId { get; set; }
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        //[BsonId]
+        //[BsonRepresentation(BsonType.ObjectId)]
         public string MedicineCategoryId { get; set; }
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
+        //[BsonId]
+        //[BsonRepresentation(BsonType.ObjectId)]
         public string MedicineCommodityId { get; set; }
         public string Name { get; set; }
         public string GenericName { get; set; }

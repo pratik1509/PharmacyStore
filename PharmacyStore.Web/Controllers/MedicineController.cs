@@ -22,13 +22,13 @@ namespace PharmacyStore.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Get(string id)
         {
-            return Success(_mapper.Map<DoctorVm>(await _medicineService.Get(id)));
+            return Success(_mapper.Map<AddUpdateMedicineDto>(await _medicineService.Get(id)));
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            return Success(_mapper.Map<List<DoctorVm>>(await _medicineService.GetAll()));
+            return Success(_mapper.Map<List<AddUpdateMedicineDto>>(await _medicineService.GetAll()));
         }
 
         [HttpPost]

@@ -2,6 +2,7 @@
 {
     public class MedicineVm
     {
+        public string Id { get; set; }
         public string ScheduleCategoryId { get; set; }
         public string MedicineCategoryId { get; set; }
         public string MedicineCommodityId { get; set; }

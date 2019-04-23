@@ -30,7 +30,20 @@ namespace PharmacyStore.Services
             return await GetOneAndProjectAsync(filterDefination, x => new MedicineDto
             {
                 Id = x.Id,
-                Category = x.Category,
+                ScheduleCategoryId = x.ScheduleCategoryId,
+                MedicineCategoryId = x.MedicineCategoryId,
+                MedicineCommodityId = x.MedicineCommodityId,
+                Name = x.Name,
+                GenericName = x.GenericName,
+                Manufacturer = x.Manufacturer,
+                DiscountPercentage = x.DiscountPercentage,
+                HSNCode = x.HSNCode,
+                Price = x.Price,
+                VAT = x.VAT,
+                AdditionalTax = x.AdditionalTax,
+                IGST = x.IGST,
+                CGST = x.CGST,
+                SGST = x.SGST,
             });
         }
 
@@ -47,7 +60,20 @@ namespace PharmacyStore.Services
             return await FindAndProjectAsync(filterDefination, x => new MedicineDto
             {
                 Id = x.Id,
-                Category = x.Category,
+                ScheduleCategoryId = x.ScheduleCategoryId,
+                MedicineCategoryId = x.MedicineCategoryId,
+                MedicineCommodityId = x.MedicineCommodityId,
+                Name = x.Name,
+                GenericName = x.GenericName,
+                Manufacturer = x.Manufacturer,
+                DiscountPercentage = x.DiscountPercentage,
+                HSNCode = x.HSNCode,
+                Price = x.Price,
+                VAT = x.VAT,
+                AdditionalTax = x.AdditionalTax,
+                IGST = x.IGST,
+                CGST = x.CGST,
+                SGST = x.SGST,
             });
         }
 
@@ -55,7 +81,20 @@ namespace PharmacyStore.Services
         {
             return await AddOneAsync(new Medicine
             {
-                Category = dto.Category,
+                ScheduleCategoryId = dto.ScheduleCategoryId,
+                MedicineCategoryId = dto.MedicineCategoryId,
+                MedicineCommodityId = dto.MedicineCommodityId,
+                Name = dto.Name,
+                GenericName = dto.GenericName,
+                Manufacturer = dto.Manufacturer,
+                DiscountPercentage = dto.DiscountPercentage,
+                HSNCode = dto.HSNCode,
+                Price = dto.Price,
+                VAT = dto.VAT,
+                AdditionalTax = dto.AdditionalTax,
+                IGST = dto.IGST,
+                CGST = dto.CGST,
+                SGST = dto.SGST,
             }, _userClaims.Id);
         }
 
@@ -64,11 +103,24 @@ namespace PharmacyStore.Services
             #region update filter
 
             var updateFilter = Builders<Medicine>.Update
-                    .Set(x => x.Category, dto.Category);
+                    .Set(x => x.ScheduleCategoryId, dto.ScheduleCategoryId)
+                    .Set(x => x.MedicineCategoryId, dto.MedicineCategoryId)
+                    .Set(x => x.MedicineCommodityId, dto.MedicineCommodityId)
+                    .Set(x => x.Name, dto.Name)
+                    .Set(x => x.GenericName, dto.GenericName)
+                    .Set(x => x.Manufacturer, dto.Manufacturer)
+                    .Set(x => x.DiscountPercentage, dto.DiscountPercentage)
+                    .Set(x => x.HSNCode, dto.HSNCode)
+                    .Set(x => x.Price, dto.Price)
+                    .Set(x => x.VAT, dto.VAT)
+                    .Set(x => x.AdditionalTax, dto.AdditionalTax)
+                    .Set(x => x.IGST, dto.IGST)
+                    .Set(x => x.CGST, dto.CGST)
+                    .Set(x => x.SGST, dto.SGST);
 
             #endregion
 
-            return await UpdateOneAsync(dto.Id, updateFilter, _userClaims.Id);
+            return await UpdateOneAsync(dto.ID, updateFilter, _userClaims.Id);
         }
 
         public async Task<bool> Delete(string id)

@@ -1,12 +1,8 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="MedicineService.cs" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\PharmacyStore.Framework\PharmacyStore.Framework.csproj" />
