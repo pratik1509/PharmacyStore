@@ -27,6 +27,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using PharmacyStore.Framework;
 using PharmacyStore.Web.Middleware;
 using Common.Persistence.SecurityManagement;
+using PharmacyStore.Web.ViewModels.Purchase;
 
 namespace PharmacyStore.Web
 {
@@ -95,6 +96,7 @@ namespace PharmacyStore.Web
 
             services.AddSingleton<IDoctorService, DoctorService>();
             services.AddSingleton<IMedicineCategoryService, MedicineCategoryService>();
+            services.AddSingleton<IPurchaseService, PurchaseService>();
 
             #endregion
 
