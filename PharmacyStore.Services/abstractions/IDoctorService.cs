@@ -1,5 +1,4 @@
-﻿using PharmacyStore.Models;
-using PharmacyStore.Services.dto.DoctorDto;
+﻿using PharmacyStore.Services.dto.DoctorDto;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
