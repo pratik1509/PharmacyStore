@@ -216,13 +216,40 @@ namespace Common.Mongo.Repository
                 .Skip(skipOrders).Limit(pageSize).Project(projection).ToListAsync();
         }
 
-		/// <summary>
-		/// Asynchronously returns a list of the documents matching the filter condition if its not IsDeleted with paged list and order by descending.
-		/// </summary>
-		/// <typeparam name="TDocument">The type representing a Document.</typeparam>
-		/// <param name="filter">A LINQ expression filter.</param>
-		/// <param name="partitionKey">An optional partition key.</param>
-		public async Task<List<TNewProjection>> GetAllWithOrderByDescendingAsync<TDocument, TNewProjection>(FilterDefinition<TDocument> filter,
+
+        /// <summary>
+        /// Asynchronously returns a list of the documents matching the filter condition if its not IsDeleted with paged list.
+        /// </summary>
+        /// <typeparam name="TDocument">The type representing a Document.</typeparam>
+        /// <param name="filter">A LINQ expression filter.</param>
+        /// <param name="partitionKey">An optional partition key.</param>
+        public async Task<Tuple<long, List<TNewProjection>>> GetAllWithOrderByAndCountAsync<TDocument, TNewProjection>(FilterDefinition<TDocument> filter,
+            Expression<Func<TDocument, TNewProjection>> projection, int pageSize, int pageNumber,
+            Expression<Func<TDocument, object>> sortBy) where TDocument : IBaseModel
+        {
+            int skipOrders = pageNumber == 0 ? 0 : (pageNumber - 1) * pageSize;
+            var compositeFilter = new FilterDefinitionBuilder<TDocument>();
+            var videoFilterDef = AddGetFilter<TDocument>(filter);
+
+            // fetching all documents
+            var filterResult = GetCollection<TDocument>().Find(videoFilterDef);
+
+            // get the count
+            var count = await filterResult.CountDocumentsAsync();
+
+            // for paging
+            var result = await filterResult.Skip(skipOrders).Limit(pageSize).Project(projection).ToListAsync();
+
+            return new Tuple<long, List<TNewProjection>>(count, result);
+        }
+
+        /// <summary>
+        /// Asynchronously returns a list of the documents matching the filter condition if its not IsDeleted with paged list and order by descending.
+        /// </summary>
+        /// <typeparam name="TDocument">The type representing a Document.</typeparam>
+        /// <param name="filter">A LINQ expression filter.</param>
+        /// <param name="partitionKey">An optional partition key.</param>
+        public async Task<List<TNewProjection>> GetAllWithOrderByDescendingAsync<TDocument, TNewProjection>(FilterDefinition<TDocument> filter,
 			Expression<Func<TDocument, TNewProjection>> projection, int pageSize, int pageNumber,
 			Expression<Func<TDocument, object>> sortBy) where TDocument : IBaseModel
 		{
