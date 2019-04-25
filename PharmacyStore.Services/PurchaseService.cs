@@ -12,7 +12,7 @@ namespace PharmacyStore.Services
 {
     public class PurchaseService : BaseService, IPurchaseService
     {
-        public async Task<PurchaseDto> GetAsync(string WholeSellerId)
+        public async Task<PurchaseDto> GetAsync(string wholeSellerId)
         {
             #region filter
 
@@ -20,7 +20,7 @@ namespace PharmacyStore.Services
             var filterDefination = filter.Empty;
 
             filterDefination = filterDefination
-                & filter.Eq(x => x.Id, WholeSellerId);
+                & filter.Eq(x => x.Id, wholeSellerId);
 
             #endregion
 
@@ -31,7 +31,7 @@ namespace PharmacyStore.Services
             });
         }
 
-        public new async Task<List<PurchaseDto>> GetAllAsync()
+        public async Task<List<PurchaseDto>> GetAllAsync()
         {
             // filter is empty because we need all data
             #region filter
@@ -62,7 +62,7 @@ namespace PharmacyStore.Services
             #region update filter
 
             var updateFilter = Builders<Purchase>.Update
-                    .Set(x => x.InvoiceNo, purchaseDto.InvoiceNo)
+                    //.Set(x => x.InvoiceNo, purchaseDto.InvoiceNo)
                     .Set(x => x.InvoiceValue, purchaseDto.InvoiceValue);
 
             #endregion
