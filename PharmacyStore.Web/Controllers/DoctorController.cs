@@ -2,6 +2,7 @@
 using Common.Persistence.SecurityManagement;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using PharmacyStore.Framework.Pagging;
 using PharmacyStore.Services.abstractions;
 using PharmacyStore.Services.dto.DoctorDto;
 using PharmacyStore.Web.Doctor.ViewModels;
@@ -13,21 +14,15 @@ namespace PharmacyStore.Web.Controllers
     public class DoctorController : BaseController
     {
         private readonly IDoctorService _doctorService;
-        private readonly IEncryptionService _encryptionService;
 
-        public DoctorController(IDoctorService doctorService, IEncryptionService encryptionService)
+        public DoctorController(IDoctorService doctorService)
         {
             _doctorService = doctorService;
-            _encryptionService = encryptionService;
         }
 
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Get(string id)
         {
-            var str = "LOdu encrypt";
-            str = _encryptionService.EncryptText(str);
-            str = _encryptionService.DecryptText(str);
             return Success(_mapper.Map<DoctorVm>(await _doctorService.Get(id)));
         }
 
@@ -35,6 +30,16 @@ namespace PharmacyStore.Web.Controllers
         public async Task<IActionResult> GetAll()
         {
             return Success(_mapper.Map<List<DoctorVm>>(await _doctorService.GetAll()));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetAllWithPagging(PagingModel pagingModel)
+        {
+            var result = await _doctorService.GetAllWithPagging(pagingModel);
+            var responseModel = _mapper.Map<List<DoctorVm>>(result.Data);
+            var paggedResult = new PagedList<DoctorVm>(responseModel, pagingModel.Page, pagingModel.PageSize, result.Paging.TotalCount);
+
+            return Success(paggedResult);
         }
 
         [HttpPost]
