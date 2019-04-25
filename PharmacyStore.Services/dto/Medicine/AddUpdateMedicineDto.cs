@@ -1,20 +1,14 @@
-using Common.Mongo.Repository;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace PharmacyStore.Models
+namespace PharmacyStore.Services.dto.Medicine
 {
-    [CollectionName("Medicines")]
-    public class Medicine : BaseModel
+    public class AddUpdateMedicineDto
     {
-        //[BsonId]
-        //[BsonRepresentation(BsonType.ObjectId)]
+        public string ID { get; set; }
         public string ScheduleCategoryId { get; set; }
-        //[BsonId]
-        //[BsonRepresentation(BsonType.ObjectId)]
         public string MedicineCategoryId { get; set; }
-        //[BsonId]
-        //[BsonRepresentation(BsonType.ObjectId)]
         public string MedicineCommodityId { get; set; }
         public string Name { get; set; }
         public string GenericName { get; set; }

@@ -49,12 +49,12 @@ namespace PharmacyStore.Framework.Filters
                 }
             }
 
-            //check header value
-            //if (string.IsNullOrEmpty(authorizationTokenValue))
-            //{
-            //    context.Result =new UnauthorizedObjectResult(new ResultVm<string>() { Data= "Missing Authorization-Token" });
-            //    return;
-            //}
+           ////  check header value
+           // if (string.IsNullOrEmpty(authorizationTokenValue))
+           // {
+           //     context.Result = new UnauthorizedObjectResult(new ResultVm<string>() { Data = "Missing Authorization-Token" });
+           //     return;
+           // }
 
             //decrypt token
 

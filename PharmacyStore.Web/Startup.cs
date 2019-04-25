@@ -26,6 +26,8 @@ using PharmacyStore.Web.Mapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using PharmacyStore.Framework;
 using PharmacyStore.Web.Middleware;
+using Common.Persistence.SecurityManagement;
+using PharmacyStore.Web.ViewModels.Purchase;
 
 namespace PharmacyStore.Web
 {
@@ -47,9 +49,11 @@ namespace PharmacyStore.Web
                 })
             .AddFluentValidation(fv =>
             {
-                fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
+               // fv.RunDefaultMvcValidationAfterFluentValidationExecutes = false;
                 fv.RegisterValidatorsFromAssemblyContaining<Startup>();
             });
+
+            services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
 
             services.AddAuthentication(x =>
             {
@@ -75,6 +79,7 @@ namespace PharmacyStore.Web
             // httpcontext for userclaims
             services.AddTransient<IHttpContextAccessor, HttpContextAccessor>();
             services.AddTransient<IUserClaimsService, UserClaims>();
+            services.AddTransient<IEncryptionService, EncryptionService>();
 
             #region request response logger
             
@@ -91,6 +96,8 @@ namespace PharmacyStore.Web
 
             services.AddSingleton<IDoctorService, DoctorService>();
             services.AddSingleton<IMedicineCategoryService, MedicineCategoryService>();
+            services.AddSingleton<IMedicineService, MedicineService>();
+            services.AddSingleton<IPurchaseService, PurchaseService>();
 
             #endregion
 
