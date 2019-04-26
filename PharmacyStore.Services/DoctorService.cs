@@ -7,6 +7,7 @@ using Common.Mongo.Repository;
 using PharmacyStore.Services.Abstraction;
 using MongoDB.Driver;
 using PharmacyStore.Framework.Pagging;
+using PharmacyStore.Services.CustomExceptions;
 
 namespace PharmacyStore.Services
 {
