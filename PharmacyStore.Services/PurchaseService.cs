@@ -92,8 +92,6 @@ namespace PharmacyStore.Services
                     .Set(x => x.ChequeAmount, purchaseDto.ChequeAmount)
                     .Set(x => x.PaidInCash, purchaseDto.PaidInCash)
                     .Set(x => x.ExtraNote, purchaseDto.ExtraNote);
-                    //.Set(x => x.InvoiceNo, purchaseDto.InvoiceNo)
-                    .Set(x => x.InvoiceValue, purchaseDto.InvoiceValue);
 
             #endregion
 
