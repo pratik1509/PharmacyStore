@@ -21,14 +21,12 @@ namespace PharmacyStore.Web.Mapper
 
             #region MedicineCategory
 
-
             CreateMap<MedicineCategoryDto, MedicineCategoryVm>();
             CreateMap<MedicineCategoryVm, MedicineCategoryDto>();
 
             #endregion
 
             #region Medicine
-
 
             CreateMap<MedicineDto, MedicineVm>();
             CreateMap<MedicineVm, MedicineDto>();

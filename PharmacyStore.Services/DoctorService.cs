@@ -6,6 +6,8 @@ using PharmacyStore.Services.dto.DoctorDto;
 using Common.Mongo.Repository;
 using PharmacyStore.Services.Abstraction;
 using MongoDB.Driver;
+using PharmacyStore.Framework.Pagging;
+using PharmacyStore.Services.CustomExceptions;
 
 namespace PharmacyStore.Services
 {
@@ -48,8 +50,37 @@ namespace PharmacyStore.Services
             });
         }
 
+        public async Task<PagedList<DoctorDto>> GetAllWithPagging(PagingModel pagingModel)
+        {
+            // filter is empty because we need all data
+            #region filter
+
+            var filter = new FilterDefinitionBuilder<Doctor>();
+            var filterDefination = filter.Empty;
+
+            var result = await GetAllWithOrderByAndCountAsync(filterDefination, x => new DoctorDto
+            {
+                DoctorName = x.DoctorName,
+                Address = x.Address
+            }, pagingModel.PageSize, pagingModel.Page, x => x.CreatedOn);
+
+            var paggedResult = new PagedList<DoctorDto>(result.Item2, pagingModel.Page, pagingModel.PageSize, result.Item1);
+
+            #endregion
+
+            return paggedResult;
+        }
+
         public async Task<string> Create(AddUpdateDoctorDto doctorDto)
         {
+            #region validations
+
+            if (!string.IsNullOrWhiteSpace(doctorDto.DoctorName)) {
+                throw new PharmacyStoreServiceCustomException("Doctor name is compulsory", string.Empty);
+            }
+            
+            #endregion
+
             return await AddOneAsync(new Doctor
             {
                 DoctorName = doctorDto.DoctorName,

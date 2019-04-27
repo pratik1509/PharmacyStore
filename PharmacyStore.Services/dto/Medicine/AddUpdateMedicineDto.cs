@@ -6,7 +6,7 @@ namespace PharmacyStore.Services.dto.Medicine
 {
     public class AddUpdateMedicineDto
     {
-        public string ID { get; set; }
+        public string Id { get; set; }
         public string ScheduleCategoryId { get; set; }
         public string MedicineCategoryId { get; set; }
         public string MedicineCommodityId { get; set; }

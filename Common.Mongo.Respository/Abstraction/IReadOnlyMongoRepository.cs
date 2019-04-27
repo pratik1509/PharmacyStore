@@ -119,18 +119,33 @@ namespace Common.Mongo.Respository.Abstraction
             Expression<Func<TDocument, TNewProjection>> projection, int pageSize, int pageNumber,
             Expression<Func<TDocument, object>> sortBy) where TDocument : IBaseModel;
 
-		/// <summary>
-		/// Get all records with descending sorting
-		/// </summary>
-		/// <typeparam name="TDocument"></typeparam>
-		/// <typeparam name="TNewProjection"></typeparam>
-		/// <param name="filter"></param>
-		/// <param name="projection"></param>
-		/// <param name="pageSize"></param>
-		/// <param name="pageNumber"></param>
-		/// <param name="sortBy"></param>
-		/// <returns></returns>
-		Task<List<TNewProjection>> GetAllWithOrderByDescendingAsync<TDocument, TNewProjection>(FilterDefinition<TDocument> filter,
+        /// <summary>
+        /// Get all records with paging and total count
+        /// </summary>
+        /// <typeparam name="TDocument"></typeparam>
+        /// <typeparam name="TNewProjection"></typeparam>
+        /// <param name="filter"></param>
+        /// <param name="projection"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageNumber"></param>
+        /// <param name="sortBy"></param>
+        /// <returns></returns>
+        Task<Tuple<long, List<TNewProjection>>> GetAllWithOrderByAndCountAsync<TDocument, TNewProjection>(FilterDefinition<TDocument> filter,
+            Expression<Func<TDocument, TNewProjection>> projection, int pageSize, int pageNumber,
+            Expression<Func<TDocument, object>> sortBy) where TDocument : IBaseModel;
+        
+        /// <summary>
+        /// Get all records with descending sorting
+        /// </summary>
+        /// <typeparam name="TDocument"></typeparam>
+        /// <typeparam name="TNewProjection"></typeparam>
+        /// <param name="filter"></param>
+        /// <param name="projection"></param>
+        /// <param name="pageSize"></param>
+        /// <param name="pageNumber"></param>
+        /// <param name="sortBy"></param>
+        /// <returns></returns>
+        Task<List<TNewProjection>> GetAllWithOrderByDescendingAsync<TDocument, TNewProjection>(FilterDefinition<TDocument> filter,
 		   Expression<Func<TDocument, TNewProjection>> projection, int pageSize, int pageNumber,
 		   Expression<Func<TDocument, object>> sortBy) where TDocument : IBaseModel;
 

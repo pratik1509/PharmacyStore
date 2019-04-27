@@ -14,7 +14,6 @@ namespace PharmacyStore.Services
 {
     public class MedicineService : BaseService, IMedicineService
     {
-
         public async Task<MedicineDto> Get(string id)
         {
             #region filter
@@ -120,7 +119,7 @@ namespace PharmacyStore.Services
 
             #endregion
 
-            return await UpdateOneAsync(dto.ID, updateFilter, _userClaims.Id);
+            return await UpdateOneAsync(dto.Id, updateFilter, _userClaims.Id);
         }
 
         public async Task<bool> Delete(string id)
