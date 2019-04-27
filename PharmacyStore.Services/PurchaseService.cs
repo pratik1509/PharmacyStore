@@ -12,7 +12,7 @@ namespace PharmacyStore.Services
 {
     public class PurchaseService : BaseService, IPurchaseService
     {
-        public async Task<PurchaseDto> GetAsync(string WholeSellerId)
+        public async Task<PurchaseDto> GetAsync(string wholeSellerId)
         {
             #region filter
 
@@ -20,14 +20,21 @@ namespace PharmacyStore.Services
             var filterDefination = filter.Empty;
 
             filterDefination = filterDefination
-                & filter.Eq(x => x.Id, WholeSellerId);
+                & filter.Eq(x => x.Id, wholeSellerId);
 
             #endregion
 
             return await GetOneAndProjectAsync(filterDefination, x => new PurchaseDto
             {
                 InvoiceNo = x.InvoiceNo,
-                InvoiceValue = x.InvoiceValue
+                InvoiceValue = x.InvoiceValue,
+                InvoiceDate = x.InvoiceDate,
+                LastPaymentDate = x.LastPaymentDate,
+                ChequeNo = x.ChequeNo,
+                ChequeDate = x.ChequeDate,
+                ChequeAmount = x.ChequeAmount,
+                PaidInCash = x.PaidInCash,
+                ExtraNote = x.ExtraNote
             });
         }
 
@@ -43,8 +50,16 @@ namespace PharmacyStore.Services
 
             return await FindAndProjectAsync(filterDefination, x => new PurchaseDto
             {
+                wholeSellerId = x.wholeSellerId,
                 InvoiceNo = x.InvoiceNo,
-                InvoiceValue = x.InvoiceValue
+                InvoiceValue = x.InvoiceValue,
+                InvoiceDate = x.InvoiceDate,
+                LastPaymentDate = x.LastPaymentDate,
+                ChequeNo = x.ChequeNo,
+                ChequeDate = x.ChequeDate,
+                ChequeAmount = x.ChequeAmount,
+                PaidInCash = x.PaidInCash,
+                ExtraNote = x.ExtraNote
             });
         }
 
@@ -53,7 +68,14 @@ namespace PharmacyStore.Services
             return await AddOneAsync(new Purchase
             {
                 InvoiceNo = purchaseDto.InvoiceNo,
-                InvoiceValue = purchaseDto.InvoiceValue
+                InvoiceValue = purchaseDto.InvoiceValue,
+                InvoiceDate = purchaseDto.InvoiceDate,
+                LastPaymentDate = purchaseDto.LastPaymentDate,
+                ChequeNo = purchaseDto.ChequeNo,
+                ChequeDate = purchaseDto.ChequeDate,
+                ChequeAmount = purchaseDto.ChequeAmount,
+                PaidInCash = purchaseDto.PaidInCash,
+                ExtraNote = purchaseDto.ExtraNote
             }, _userClaims.Id);
         }
 
@@ -63,16 +85,22 @@ namespace PharmacyStore.Services
 
             var updateFilter = Builders<Purchase>.Update
                     .Set(x => x.InvoiceNo, purchaseDto.InvoiceNo)
-                    .Set(x => x.InvoiceValue, purchaseDto.InvoiceValue);
+                    .Set(x => x.InvoiceValue, purchaseDto.InvoiceValue)
+                    .Set(x => x.InvoiceDate, purchaseDto.InvoiceDate)
+                    .Set(x => x.LastPaymentDate, purchaseDto.LastPaymentDate)
+                    .Set(x => x.ChequeNo, purchaseDto.ChequeNo)
+                    .Set(x => x.ChequeAmount, purchaseDto.ChequeAmount)
+                    .Set(x => x.PaidInCash, purchaseDto.PaidInCash)
+                    .Set(x => x.ExtraNote, purchaseDto.ExtraNote);
 
             #endregion
 
             return await UpdateOneAsync(purchaseDto.InvoiceNo, updateFilter, _userClaims.Id);
         }
 
-        public async Task<bool> DeleteAsync(string WholeSellerId)
+        public async Task<bool> DeleteAsync(string wholeSellerId)
         {
-            return await DeleteOneAsync<Purchase>(x => x.Id == WholeSellerId, _userClaims.Id);
+            return await DeleteOneAsync<Purchase>(x => x.Id == wholeSellerId, _userClaims.Id);
         }
 
     }

@@ -7,7 +7,7 @@ namespace PharmacyStore.Services.dto.PurchaseDto
 {
     public class AddUpdatePurchaseDto
     {
-        public string WholeSellerId { get; set; }
+        public string wholeSellerId { get; set; }
         public string InvoiceNo { get; set; }
         public string InvoiceValue { get; set; }
         public string InvoiceDate { get; set; }

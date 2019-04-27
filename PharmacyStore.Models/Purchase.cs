@@ -8,9 +8,9 @@ namespace PharmacyStore.Models
     [CollectionName("Purchases")]
     public class Purchase : BaseModel
     {
-        [BsonId]
+        
         [BsonRepresentation(BsonType.ObjectId)]
-        public string WholeSellerId { get; set; }
+        public string wholeSellerId { get; set; }
         public string InvoiceNo { get; set; }
         public string InvoiceValue { get; set; }
         public string InvoiceDate { get; set; }
