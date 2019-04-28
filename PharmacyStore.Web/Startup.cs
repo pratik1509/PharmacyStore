@@ -98,6 +98,7 @@ namespace PharmacyStore.Web
             services.AddSingleton<IMedicineCategoryService, MedicineCategoryService>();
             services.AddSingleton<IMedicineService, MedicineService>();
             services.AddSingleton<IPurchaseService, PurchaseService>();
+            services.AddSingleton<IWholeSellerService, WholeSellerService>();
 
             #endregion
 
