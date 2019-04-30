@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation;
 using PharmacyStore.Models;
+using static PharmacyStore.Services.dto.PurchaseDto.AddUpdatePurchaseDto;
 
 namespace PharmacyStore.Web.ViewModels.Purchase
 {
@@ -20,10 +21,6 @@ namespace PharmacyStore.Web.ViewModels.Purchase
         public double ChequeAmount { get; set; }
         public double PaidInCash { get; set; }
         public string ExtraNote { get; set; }
-        public List<PurchaseMedicine> Medicines { get; set; }
-
-
-        public string MedicineId { get; set; }
         public string BatchNo { get; set; }
         public string ExpiryDate { get; set; }
         public string BoxNo { get; set; }
@@ -39,7 +36,12 @@ namespace PharmacyStore.Web.ViewModels.Purchase
         public double IGST { get; set; }
         public double CGST { get; set; }
         public double SGST { get; set; }
+        public List<AddOrUpdatePurchaseMedicineDto> Medicines { get; set; }
+
+
     }
+
+    #region Validator
 
     public class AddUpdatePurchaseVmValidator : AbstractValidator<AddUpdatePurchaseVm>
     {
@@ -70,6 +72,19 @@ namespace PharmacyStore.Web.ViewModels.Purchase
             RuleFor(x => x.IGST).NotEmpty();
             RuleFor(x => x.CGST).NotEmpty();
             RuleFor(x => x.SGST).NotEmpty();
+            RuleFor(x => x.Medicines).NotEmpty();
+            RuleFor(x => x.Medicines).SetCollectionValidator(x => new AddOrUpdatePurchaseMedicineDtoValidator()).When(x => x.Medicines != null && x.Medicines.Any());
         }
     }
+
+    public class AddOrUpdatePurchaseMedicineDtoValidator : AbstractValidator<AddOrUpdatePurchaseMedicineDto>
+    {
+        public AddOrUpdatePurchaseMedicineDtoValidator()
+        {
+            RuleFor(x => x.MedicineId).NotEmpty();
+            //TODO Add later
+        }
+    }
+
+    #endregion
 }

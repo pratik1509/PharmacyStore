@@ -26,7 +26,8 @@ namespace PharmacyStore.Models
 
     public class PurchaseMedicine
     {
-        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string Id { get; set; }
         [BsonRepresentation(BsonType.ObjectId)]
         public string MedicineId { get; set; }
         public string BatchNo { get; set; }
