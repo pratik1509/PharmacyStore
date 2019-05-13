@@ -1,13 +1,12 @@
-using Common.Mongo.Repository;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace PharmacyStore.Models
+namespace PharmacyStore.Services.dto.WholeSellerDto
 {
-    [CollectionName("WholeSellers")]
-    public class WholeSeller : BaseModel {
-        //[BsonId]
-        //[BsonRepresentation(BsonType.ObjectId)]
+    public class AddUpdateWholeSellerDto
+    {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string VATNo { get; set; }
@@ -16,5 +15,6 @@ namespace PharmacyStore.Models
         public string TINNo { get; set; }
         public string GSTINNo { get; set; }
         public string ContactPersonNo { get; set; }
+
     }
 }

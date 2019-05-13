@@ -7,11 +7,86 @@ using System.Threading.Tasks;
 using PharmacyStore.Models;
 using MongoDB.Driver;
 using Common.Mongo.Repository;
+using PharmacyStore.Services.dto.PurchaseDto;
+using System.Linq;
+using MongoDB.Bson;
 
 namespace PharmacyStore.Services
 {
     public class PurchaseService : BaseService, IPurchaseService
     {
+        #region private methods
+
+        private PurchaseMedicine FromPurchaseMedicineModel(AddUpdatePurchaseDto.AddOrUpdatePurchaseMedicineDto model)
+        {
+            PurchaseMedicine purchaseMedicine = new PurchaseMedicine()
+            {
+                Id = model.Id,
+                MedicineId = model.MedicineId,
+                BatchNo = model.BatchNo,
+                ExpiryDate = model.ExpiryDate,
+                BoxNo = model.BoxNo,
+                UnitsPerStrip = model.UnitsPerStrip,
+                NoOfStrips = model.NoOfStrips,
+                PricePerStrip = model.PricePerStrip,
+                MRPPerStrip = model.MRPPerStrip,
+                FreeStrips = model.FreeStrips,
+                DiscountPercentage = model.DiscountPercentage,
+                HSNCode = model.HSNCode,
+                VAT = model.VAT,
+                AdditionalTax = model.AdditionalTax,
+                IGST = model.IGST,
+                CGST = model.CGST,
+                SGST = model.SGST,
+            };
+
+            return purchaseMedicine;
+        }
+
+        private AddUpdatePurchaseDto.AddOrUpdatePurchaseMedicineDto ToPurchaseMedicineModel(PurchaseMedicine entity)
+        {
+            AddUpdatePurchaseDto.AddOrUpdatePurchaseMedicineDto purchaseMedicine = new AddUpdatePurchaseDto.AddOrUpdatePurchaseMedicineDto()
+            {
+                Id = entity.Id,
+                MedicineId = entity.MedicineId,
+                BatchNo = entity.BatchNo,
+                ExpiryDate = entity.ExpiryDate,
+                BoxNo = entity.BoxNo,
+                UnitsPerStrip = entity.UnitsPerStrip,
+                NoOfStrips = entity.NoOfStrips,
+                PricePerStrip = entity.PricePerStrip,
+                MRPPerStrip = entity.MRPPerStrip,
+                FreeStrips = entity.FreeStrips,
+                DiscountPercentage = entity.DiscountPercentage,
+                HSNCode = entity.HSNCode,
+                VAT = entity.VAT,
+                AdditionalTax = entity.AdditionalTax,
+                IGST = entity.IGST,
+                CGST = entity.CGST,
+                SGST = entity.SGST,
+            };
+
+            return purchaseMedicine;
+        }
+
+        private void ValidatePurchaseMedicines(List<PurchaseMedicine> purchaseMedicinez)
+        {
+            #region validations
+
+            // at lease one medicine 
+
+            // medicines id mismatch in database
+
+            //if (!string.IsNullOrWhiteSpace(doctorDto.DoctorName))
+            //{
+            //    throw new PharmacyStoreServiceCustomException("Doctor name is compulsory", string.Empty);
+            //}
+
+            #endregion
+        }
+
+        #endregion
+
         public async Task<PurchaseDto> GetAsync(string wholeSellerId)
         {
             #region filter
@@ -65,7 +140,8 @@ namespace PharmacyStore.Services
 
         public async Task<string> CreateAsync(AddUpdatePurchaseDto purchaseDto)
         {
-            return await AddOneAsync(new Purchase
+
+            var entity = new Purchase
             {
                 InvoiceNo = purchaseDto.InvoiceNo,
                 InvoiceValue = purchaseDto.InvoiceValue,
@@ -76,11 +152,35 @@ namespace PharmacyStore.Services
                 ChequeAmount = purchaseDto.ChequeAmount,
                 PaidInCash = purchaseDto.PaidInCash,
                 ExtraNote = purchaseDto.ExtraNote
-            }, _userClaims.Id);
+            };
+
+            entity.Medicines = purchaseDto.Medicines.Select(x => FromPurchaseMedicineModel(x)).ToList();
+
+            entity.Medicines.ForEach(x =>
+            {
+                x.Id = ObjectId.GenerateNewId().ToString();
+            });
+
+            #region validations
+
+            ValidatePurchaseMedicines(entity.Medicines);
+
+            #endregion
+
+            return await AddOneAsync(entity, _userClaims.Id);
         }
 
         public async Task<bool> UpdateAsync(AddUpdatePurchaseDto purchaseDto)
         {
+
+            var medicines = purchaseDto.Medicines.Select(x => FromPurchaseMedicineModel(x)).ToList();
+
+            #region validations
+
+            ValidatePurchaseMedicines(medicines);
+
+            #endregion
+
             #region update filter
 
             var updateFilter = Builders<Purchase>.Update
@@ -91,7 +191,8 @@ namespace PharmacyStore.Services
                     .Set(x => x.ChequeNo, purchaseDto.ChequeNo)
                     .Set(x => x.ChequeAmount, purchaseDto.ChequeAmount)
                     .Set(x => x.PaidInCash, purchaseDto.PaidInCash)
-                    .Set(x => x.ExtraNote, purchaseDto.ExtraNote);
+                    .Set(x => x.ExtraNote, purchaseDto.ExtraNote)
+                    .Set(x => x.Medicines, medicines);
 
             #endregion
 
@@ -102,6 +203,5 @@ namespace PharmacyStore.Services
         {
             return await DeleteOneAsync<Purchase>(x => x.Id == wholeSellerId, _userClaims.Id);
         }
-
     }
 }

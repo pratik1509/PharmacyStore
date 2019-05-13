@@ -15,7 +15,7 @@ namespace PharmacyStore.Services
     {
 
         public async Task<DoctorDto> Get(string doctorId)
-        {
+        { 
             #region filter
 
             var filter = new FilterDefinitionBuilder<Doctor>();
@@ -70,7 +70,7 @@ namespace PharmacyStore.Services
 
             return paggedResult;
         }
-
+         
         public async Task<string> Create(AddUpdateDoctorDto doctorDto)
         {
             #region validations

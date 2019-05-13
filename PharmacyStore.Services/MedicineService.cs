@@ -14,6 +14,8 @@ namespace PharmacyStore.Services
 {
     public class MedicineService : BaseService, IMedicineService
     {
+        
+
         public async Task<MedicineDto> Get(string id)
         {
             #region filter
