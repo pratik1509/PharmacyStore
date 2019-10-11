@@ -6,10 +6,6 @@ import { Screen1RoutingModule } from './screen1-routing.module';
 
 @NgModule({
   declarations: [Screen1Component],
-  imports: [
-    CommonModule,
-    Screen1RoutingModule,
-    FlexLayoutModule.withConfig({addFlexToParent: false})
-  ]
+  imports: [CommonModule, Screen1RoutingModule, FlexLayoutModule.withConfig({ addFlexToParent: false })]
 })
-export class Screen1Module { }
+export class Screen1Module {}

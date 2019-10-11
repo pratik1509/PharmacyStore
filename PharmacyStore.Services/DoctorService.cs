@@ -75,7 +75,7 @@ namespace PharmacyStore.Services
         {
             #region validations
 
-            if (!string.IsNullOrWhiteSpace(doctorDto.DoctorName)) {
+            if (string.IsNullOrWhiteSpace(doctorDto.DoctorName)) {
                 throw new PharmacyStoreServiceCustomException("Doctor name is compulsory", string.Empty);
             }
             
