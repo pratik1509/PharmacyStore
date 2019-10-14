@@ -14,7 +14,7 @@ export class DataAccessService {
     return body || {};
   }
 
-  getDoctors(): Observable<any> {
-    return this.client.post(`${this.DATA_ACCESS_PREFIX}/Doctor/GetAllWithPagging`, {}).pipe(map(this.extractData));
+  getDoctors() {
+    return this.client.post(`${this.DATA_ACCESS_PREFIX}/Doctor/GetAllWithPagging`, {});
   }
 }
