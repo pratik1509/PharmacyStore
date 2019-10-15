@@ -40,9 +40,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DoctorRoutingModule } from './doctor-routing.module';
 import { CreateComponent } from './create/create.component';
 import { DoctorComponent } from './doctor.component';
+import { ListComponent } from './list/list.component';
 
 @NgModule({
-  declarations: [DoctorComponent, CreateComponent],
+  declarations: [DoctorComponent, CreateComponent, ListComponent],
   imports: [
     CommonModule,
     DoctorRoutingModule,
