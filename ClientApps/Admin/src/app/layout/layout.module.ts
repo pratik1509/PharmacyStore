@@ -41,7 +41,6 @@ import { TopnavComponent } from './components/topnav/topnav.component';
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { NavComponent } from './nav/nav.component';
-import { DoctorComponent } from './doctor/doctor.component';
 
 @NgModule({
   imports: [
@@ -85,6 +84,6 @@ import { DoctorComponent } from './doctor/doctor.component';
     MatTooltipModule,
     MatTreeModule
   ],
-  declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent, DoctorComponent, DoctorComponent]
+  declarations: [LayoutComponent, NavComponent, TopnavComponent, SidebarComponent]
 })
 export class LayoutModule {}
