@@ -13,7 +13,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DoctorRoutingModule } from './doctor-routing.module';
 
 @NgModule({
-  imports: [NgModule, DoctorRoutingModule],
+  imports: [CommonModule, NgModule, DoctorRoutingModule],
   declarations: [NgModule, DoctorRoutingModule]
 })
 export class DoctorModule {}
