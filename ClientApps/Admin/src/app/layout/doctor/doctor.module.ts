@@ -41,6 +41,7 @@ import { DoctorRoutingModule } from './doctor-routing.module';
 import { CreateComponent } from './create/create.component';
 import { DoctorComponent } from './doctor.component';
 import { ListComponent } from './list/list.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 @NgModule({
   declarations: [DoctorComponent, CreateComponent, ListComponent],
@@ -81,7 +82,8 @@ import { ListComponent } from './list/list.component';
     MatTabsModule,
     MatToolbarModule,
     MatTooltipModule,
-    MatTreeModule
+    MatTreeModule,
+    FlexLayoutModule
   ]
 })
 export class DoctorModule {}
