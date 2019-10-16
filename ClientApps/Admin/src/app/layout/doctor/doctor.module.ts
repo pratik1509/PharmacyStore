@@ -42,6 +42,7 @@ import { CreateComponent } from './create/create.component';
 import { DoctorComponent } from './doctor.component';
 import { ListComponent } from './list/list.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [DoctorComponent, CreateComponent, ListComponent],
@@ -83,7 +84,8 @@ import { FlexLayoutModule } from '@angular/flex-layout';
     MatToolbarModule,
     MatTooltipModule,
     MatTreeModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    ReactiveFormsModule
   ]
 })
 export class DoctorModule {}
