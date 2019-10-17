@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { DataAccessService } from '../../../services/data-access.service';
 
 
 
@@ -9,28 +11,31 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./create.component.scss']
 })
 export class CreateComponent implements OnInit {
-  public ownerForm: FormGroup;
-  constructor() {}
+  public doctorForm: FormGroup;
+  constructor(private router: Router, public dataAccess: DataAccessService) {}
 
   ngOnInit() {
-    this.ownerForm = new FormGroup({
-      name: new FormControl('', [Validators.required, Validators.maxLength(60)]),
-      dateOfBirth: new FormControl(new Date()),
-      address: new FormControl('', [Validators.required, Validators.maxLength(100)])
+    this.doctorForm = new FormGroup({
+      doctorName: new FormControl('', [Validators.required]),
+      address: new FormControl('', [Validators.required])
     });
   }
 
   public hasError = (controlName: string, errorName: string) => {
-    return this.ownerForm.controls[controlName].hasError(errorName);
+    return this.doctorForm.controls[controlName].hasError(errorName);
   }
 
   public onCancel = () => {
-    //this.location.back();
+    this.router.navigate(['/doctor/list']);
   }
 
-  public createOwner = (ownerFormValue) => {
-    if (this.ownerForm.valid) {
-      //this.executeOwnerCreation(ownerFormValue);
+  public create = (doctorFormValue) => {
+    debugger
+    let doctorCreatePayload = { doctorName: doctorFormValue.doctorName, address: doctorFormValue.address};
+    if (this.doctorForm.valid) {
+      this.dataAccess.post('Doctor/Create', doctorCreatePayload).subscribe((data: any) => {
+        this.router.navigate(['/doctor/list']);
+      });
     }
   }
 }

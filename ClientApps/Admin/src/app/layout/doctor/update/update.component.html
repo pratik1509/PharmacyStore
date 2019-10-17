@@ -1,12 +1,12 @@
 <section fxLayout="row wrap" >
   <mat-card  fxFlex.xs="100%">
-    <mat-card-title>Create a new doctor</mat-card-title>
+    <mat-card-title>Update a new doctor</mat-card-title>
     {{doctorFormValue}}
-    <form [formGroup]="doctorForm" autocomplete="off" novalidate (ngSubmit)="create(doctorForm.value)" fxLayout="column wrap"
+    <form [formGroup]="doctorForm" autocomplete="off" novalidate (ngSubmit)="update(doctorForm.value)" fxLayout="column wrap"
       fxLayoutAlign="center center" fxLayoutGap="10px">
       <mat-card-content>
         <p>
-        <mat-form-field >
+         <mat-form-field >
           <input matInput type="text" placeholder="Doctor name" formControlName="doctorName" id="doctorName">
           <mat-error *ngIf="hasError('doctorName', 'required')">Name is required</mat-error>
         </mat-form-field>
@@ -21,7 +21,7 @@
       </mat-card-content>
       <p>
       <mat-card-actions align="center">
-        <button mat-raised-button color="primary" [disabled]="!doctorForm.valid">Create</button>
+        <button mat-raised-button color="primary" [disabled]="!doctorForm.valid">Update</button>
         <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
       </mat-card-actions>
       </p>

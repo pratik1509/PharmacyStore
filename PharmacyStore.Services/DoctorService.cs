@@ -15,7 +15,7 @@ namespace PharmacyStore.Services
     {
 
         public async Task<DoctorDto> Get(string doctorId)
-        { 
+        {
             #region filter
 
             var filter = new FilterDefinitionBuilder<Doctor>();
@@ -28,6 +28,7 @@ namespace PharmacyStore.Services
 
             return await GetOneAndProjectAsync(filterDefination, x => new DoctorDto
             {
+                Id = x.Id,
                 DoctorName = x.DoctorName,
                 Address = x.Address
             });
@@ -45,6 +46,7 @@ namespace PharmacyStore.Services
 
             return await FindAndProjectAsync(filterDefination, x => new DoctorDto
             {
+                Id = x.Id,
                 DoctorName = x.DoctorName,
                 Address = x.Address
             });
@@ -61,7 +63,8 @@ namespace PharmacyStore.Services
             var result = await GetAllWithOrderByAndCountAsync(filterDefination, x => new DoctorDto
             {
                 DoctorName = x.DoctorName,
-                Address = x.Address
+                Address = x.Address,
+                Id = x.Id
             }, pagingModel.PageSize, pagingModel.Page, x => x.CreatedOn);
 
             var paggedResult = new PagedList<DoctorDto>(result.Item2, pagingModel.Page, pagingModel.PageSize, result.Item1);
@@ -70,15 +73,16 @@ namespace PharmacyStore.Services
 
             return paggedResult;
         }
-         
+
         public async Task<string> Create(AddUpdateDoctorDto doctorDto)
         {
             #region validations
 
-            if (string.IsNullOrWhiteSpace(doctorDto.DoctorName)) {
+            if (string.IsNullOrWhiteSpace(doctorDto.DoctorName))
+            {
                 throw new PharmacyStoreServiceCustomException("Doctor name is compulsory", string.Empty);
             }
-            
+
             #endregion
 
             return await AddOneAsync(new Doctor

@@ -8,7 +8,7 @@ import { DataAccessService } from '../../../services/data-access.service';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  displayedColumns: string[] = ['doctorName', 'address'];
+  displayedColumns: string[] = ['doctorName', 'address','actions'];
   public dataSource = new MatTableDataSource();
 
   public paging: any = {};
