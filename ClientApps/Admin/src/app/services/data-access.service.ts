@@ -19,7 +19,11 @@ export class DataAccessService {
   }
 
   public post(route: string, body) {
-    return this.http.post(this.createCompleteRoute(route), body, this.generateHeaders());
+    return this.http.post(this.createCompleteRoute(route), body, this.generateHeaders()).pipe(
+      map((res: any) => {
+        return res.data;
+      })
+    );
   }
 
   public put(route: string, body) {
