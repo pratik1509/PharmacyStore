@@ -17,15 +17,6 @@ const routes: Routes = [
         loadChildren: './dashboard/dashboard.module#DashboardModule'
       },
       {
-        path: 'screen1',
-        loadChildren: './screen1/screen1.module#Screen1Module'
-      },
-      // {
-      //   path: 'doctor',
-      //   component: DoctorComponent
-
-      // }
-      {
         path: 'doctor',
         loadChildren: './doctor/doctor.module#DoctorModule'
       }
