@@ -1,0 +1,30 @@
+<section fxLayout="row wrap" >
+  <mat-card  fxFlex.xs="100%">
+    <mat-card-title>Create a new wholeSeller</mat-card-title>
+    {{wholeSellerFormValue}}
+    <form [formGroup]="wholeSellerForm" autocomplete="off" novalidate (ngSubmit)="create(wholeSellerForm.value)" fxLayout="column wrap"
+      fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-card-content>
+        <p>
+        <mat-form-field >
+          <input matInput type="text" placeholder="WholeSeller name" formControlName="wholeSellerName" id="wholeSellerName">
+          <mat-error *ngIf="hasError('wholeSellerName', 'required')">Name is required</mat-error>
+        </mat-form-field>
+</p>
+<p>
+        <mat-form-field>
+          <textarea matInput placeholder="Address" formControlName="address"></textarea>
+          <mat-error *ngIf="hasError('address', 'required')">Address is required</mat-error>
+        </mat-form-field>
+</p>
+
+      </mat-card-content>
+      <p>
+      <mat-card-actions align="center">
+        <button mat-raised-button color="primary" [disabled]="!wholeSellerForm.valid">Create</button>
+        <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+      </mat-card-actions>
+      </p>
+    </form>
+  </mat-card>
+</section>

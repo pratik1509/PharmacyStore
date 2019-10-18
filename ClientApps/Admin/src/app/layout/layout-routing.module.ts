@@ -19,6 +19,10 @@ const routes: Routes = [
       {
         path: 'doctor',
         loadChildren: './doctor/doctor.module#DoctorModule'
+      },
+      {
+        path: 'wholeseller',
+        loadChildren: './wholeSeller/wholeSeller.module#WholeSellerModule'
       }
     ]
   }
