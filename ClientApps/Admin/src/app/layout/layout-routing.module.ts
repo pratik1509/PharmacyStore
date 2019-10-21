@@ -31,6 +31,10 @@ const routes: Routes = [
       {
         path: 'schedulecategory',
         loadChildren: './scheduleCategory/scheduleCategory.module#ScheduleCategoryModule'
+      },
+      {
+        path: 'medicinecommodity',
+        loadChildren: './medicineCommodity/medicineCommodity.module#MedicineCommodityModule'
       }
     ]
   }

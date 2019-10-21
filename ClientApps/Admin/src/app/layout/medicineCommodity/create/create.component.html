@@ -1,0 +1,24 @@
+<section fxLayout="row wrap" >
+  <mat-card  fxFlex.xs="100%">
+    <mat-card-title>Create a new medicineCommodity</mat-card-title>
+    {{medicineCommodityFormValue}}
+    <form [formGroup]="medicineCommodityForm" autocomplete="off" novalidate (ngSubmit)="create(medicineCommodityForm.value)" fxLayout="column wrap"
+      fxLayoutAlign="center center" fxLayoutGap="10px">
+      <mat-card-content>
+        <p>
+        <mat-form-field >
+          <input matInput type="text" placeholder="Commodity" formControlName="commodity" id="commodity">
+          <mat-error *ngIf="hasError('commodity', 'required')">commodity is required</mat-error>
+        </mat-form-field>
+</p>
+
+      </mat-card-content>
+      <p>
+      <mat-card-actions align="center">
+        <button mat-raised-button color="primary" [disabled]="!medicineCommodityForm.valid">Create</button>
+        <button type="button" mat-raised-button color="warn" (click)="onCancel()">Cancel</button>
+      </mat-card-actions>
+      </p>
+    </form>
+  </mat-card>
+</section>
