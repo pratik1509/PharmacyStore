@@ -106,6 +106,7 @@ namespace PharmacyStore.Web
             services.AddSingleton<IMedicineService, MedicineService>();
             services.AddSingleton<IPurchaseService, PurchaseService>();
             services.AddSingleton<IWholeSellerService, WholeSellerService>();
+            services.AddSingleton<IScheduledCategoryService, ScheduledCategoryService>();
 
             #endregion
 
