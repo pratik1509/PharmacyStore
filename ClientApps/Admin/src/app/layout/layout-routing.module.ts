@@ -23,6 +23,10 @@ const routes: Routes = [
       {
         path: 'wholeseller',
         loadChildren: './wholeSeller/wholeSeller.module#WholeSellerModule'
+      },
+      {
+        path: 'medicinecategory',
+        loadChildren: './medicineCategory/medicineCategory.module#MedicineCategoryModule'
       }
     ]
   }

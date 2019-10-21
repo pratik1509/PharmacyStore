@@ -19,6 +19,18 @@ namespace PharmacyStore.Web.Controllers
             _medicineCategoryService = medicineCategoryService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Get(string id)
+        {
+            return Success(_mapper.Map<AddUpdateMedicineCategoryDto>(await _medicineCategoryService.Get(id)));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            return Success(_mapper.Map<List<AddUpdateMedicineCategoryDto>>(await _medicineCategoryService.GetAll()));
+        }
+
         [HttpPost]
         public async Task<IActionResult> Create(AddUpdateMedicineCategoryVm model)
         {
