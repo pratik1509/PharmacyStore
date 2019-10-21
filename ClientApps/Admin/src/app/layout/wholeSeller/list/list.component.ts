@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
-  displayedColumns: string[] = ['address', 'contactPersonNo', 'cstNo', 'drugLicenseNo', 'gstinNo', 'name', 'tinNo', 'vatNo', 'actions'];
+  displayedColumns: string[] = ['name', 'address', 'contactPersonNo', 'cstNo', 'drugLicenseNo', 'gstinNo', 'tinNo', 'vatNo', 'actions'];
   public dataSource = new MatTableDataSource();
 
   public paging: any = {};
@@ -23,11 +23,10 @@ export class ListComponent implements OnInit {
 
   public getAllWholeSellers = () => {
     this.dataAccess.get('WholeSeller/GetAll').subscribe((data: any) => {
-      debugger;
       this.dataSource.data = data.data;
       // this.paging = data.paging;
     });
-  }
+  };
   public getPaginatorData(event: PageEvent): PageEvent {
     this.paging.pageSize = event.pageSize;
     this.paging.page = event.pageIndex + 1;
@@ -43,7 +42,7 @@ export class ListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.dataAccess.post('WholeSeller/Delete?id=' + wholeSellerId, {}).subscribe((data: any) => {
+        this.dataAccess.post('wholeseller/Delete?id=' + wholeSellerId, {}).subscribe((data: any) => {
           this.paging.page = 0;
           this.getAllWholeSellers();
         });

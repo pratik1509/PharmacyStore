@@ -1,20 +1,63 @@
 <section fxLayout="row wrap" >
   <mat-card  fxFlex.xs="100%">
-    <mat-card-title>Update a new wholeSeller</mat-card-title>
+    <mat-card-title>Update a new hole Seller</mat-card-title>
     {{wholeSellerFormValue}}
     <form [formGroup]="wholeSellerForm" autocomplete="off" novalidate (ngSubmit)="update(wholeSellerForm.value)" fxLayout="column wrap"
       fxLayoutAlign="center center" fxLayoutGap="10px">
       <mat-card-content>
         <p>
-         <mat-form-field >
-          <input matInput type="text" placeholder="WholeSeller name" formControlName="wholeSellerName" id="wholeSellerName">
-          <mat-error *ngIf="hasError('wholeSellerName', 'required')">Name is required</mat-error>
+        <mat-form-field >
+          <input matInput type="text" placeholder="Name" formControlName="name" id="wholeSellerName">
+          <mat-error *ngIf="hasError('name', 'required')">Name is required</mat-error>
         </mat-form-field>
 </p>
 <p>
         <mat-form-field>
           <textarea matInput placeholder="Address" formControlName="address"></textarea>
           <mat-error *ngIf="hasError('address', 'required')">Address is required</mat-error>
+        </mat-form-field>
+</p>
+
+ <p>
+        <mat-form-field >
+          <input matInput type="text" placeholder="contactPersonNo" formControlName="contactPersonNo" id="contactPersonNo">
+          <mat-error *ngIf="hasError('contactPersonNo', 'required')">contactPersonNo is required</mat-error>
+        </mat-form-field>
+</p>
+
+ <p>
+        <mat-form-field >
+          <input matInput type="text" placeholder="drugLicenseNo" formControlName="drugLicenseNo" id="drugLicenseNo">
+          <mat-error *ngIf="hasError('drugLicenseNo', 'required')">drugLicenseNo is required</mat-error>
+        </mat-form-field>
+</p>
+
+ <p>
+        <mat-form-field >
+          <input matInput type="text" placeholder="cstNo" formControlName="cstNo" id="cstNo">
+          <mat-error *ngIf="hasError('cstNo', 'required')">cstNo is required</mat-error>
+        </mat-form-field>
+</p>
+
+ <p>
+        <mat-form-field >
+          <input matInput type="text" placeholder="gstinNo" formControlName="gstinNo" id="gstinNo">
+          <mat-error *ngIf="hasError('gstinNo', 'required')">gstinNo is required</mat-error>
+        </mat-form-field>
+</p>
+
+ <p>
+        <mat-form-field >
+          <input matInput type="text" placeholder="tinNo" formControlName="tinNo" id="tinNo">
+          <mat-error *ngIf="hasError('tinNo', 'required')">tinNo is required</mat-error>
+        </mat-form-field>
+</p>
+
+
+ <p>
+        <mat-form-field >
+          <input matInput type="text" placeholder="vatNo" formControlName="vatNo" id="vatNo">
+          <mat-error *ngIf="hasError('vatNo', 'required')">vatNo is required</mat-error>
         </mat-form-field>
 </p>
 

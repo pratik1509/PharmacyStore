@@ -14,25 +14,40 @@ export class CreateComponent implements OnInit {
 
   ngOnInit() {
     this.wholeSellerForm = new FormGroup({
-      wholeSellerName: new FormControl('', [Validators.required]),
-      address: new FormControl('', [Validators.required])
+      name: new FormControl('', [Validators.required]),
+      address: new FormControl('', [Validators.required]),
+      contactPersonNo: new FormControl('', [Validators.required]),
+      drugLicenseNo: new FormControl('', [Validators.required]),
+      cstNo: new FormControl('', [Validators.required]),
+      gstinNo: new FormControl('', [Validators.required]),
+      tinNo: new FormControl('', [Validators.required]),
+      vatNo: new FormControl('', [Validators.required])
     });
   }
 
   public hasError = (controlName: string, errorName: string) => {
     return this.wholeSellerForm.controls[controlName].hasError(errorName);
-  };
+  }
 
   public onCancel = () => {
-    this.router.navigate(['/wholeSeller/list']);
-  };
+    this.router.navigate(['/wholeseller/list']);
+  }
 
   public create = wholeSellerFormValue => {
-    let wholeSellerCreatePayload = { wholeSellerName: wholeSellerFormValue.wholeSellerName, address: wholeSellerFormValue.address };
+    const wholeSellerCreatePayload = {
+      name: wholeSellerFormValue.name,
+      address: wholeSellerFormValue.address,
+      contactPersonNo: wholeSellerFormValue.contactPersonNo,
+      drugLicenseNo: wholeSellerFormValue.drugLicenseNo,
+      cstNo: wholeSellerFormValue.address,
+      gstinNo: wholeSellerFormValue.gstinNo,
+      tinNo: wholeSellerFormValue.tinNo,
+      vatNo: wholeSellerFormValue.vatNo
+    };
     if (this.wholeSellerForm.valid) {
       this.dataAccess.post('WholeSeller/Create', wholeSellerCreatePayload).subscribe((data: any) => {
-        this.router.navigate(['/wholeSeller/list']);
+        this.router.navigate(['/wholeseller/list']);
       });
     }
-  };
+  }
 }

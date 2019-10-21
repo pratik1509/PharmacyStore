@@ -10,7 +10,7 @@
 -->
 <table mat-table [dataSource]="dataSource" >
 
-  <ng-container matColumnDef="wholeSellerName">
+  <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef > Name </th>
     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
@@ -20,40 +20,42 @@
     <td mat-cell *matCellDef="let element"> {{element.address}} </td>
   </ng-container>
 
-<ng-container matColumnDef="vatNo">
-    <th mat-header-cell *matHeaderCellDef> vatNo </th>
-    <td mat-cell *matCellDef="let element"> {{element.vatNo}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="cstNo">
-    <th mat-header-cell *matHeaderCellDef> cstNo </th>
-    <td mat-cell *matCellDef="let element"> {{element.cstNo}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="drugLicenseNo">
-    <th mat-header-cell *matHeaderCellDef> AddrugLicenseNodress </th>
-    <td mat-cell *matCellDef="let element"> {{element.drugLicenseNo}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="tinNo">
-    <th mat-header-cell *matHeaderCellDef> tinNo </th>
-    <td mat-cell *matCellDef="let element"> {{element.tinNo}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="gstinNo">
-    <th mat-header-cell *matHeaderCellDef> gstinNo </th>
-    <td mat-cell *matCellDef="let element"> {{element.gstinNo}} </td>
-  </ng-container>
-
   <ng-container matColumnDef="contactPersonNo">
     <th mat-header-cell *matHeaderCellDef> contactPersonNo </th>
     <td mat-cell *matCellDef="let element"> {{element.contactPersonNo}} </td>
   </ng-container>
 
+    <ng-container matColumnDef="drugLicenseNo">
+    <th mat-header-cell *matHeaderCellDef> drugLicenseNo </th>
+    <td mat-cell *matCellDef="let element"> {{element.drugLicenseNo}} </td>
+  </ng-container>
+
+    <ng-container matColumnDef="gstinNo">
+    <th mat-header-cell *matHeaderCellDef> gstinNo </th>
+    <td mat-cell *matCellDef="let element"> {{element.gstinNo}} </td>
+  </ng-container>
+
+    <ng-container matColumnDef="tinNo">
+    <th mat-header-cell *matHeaderCellDef> tinNo </th>
+    <td mat-cell *matCellDef="let element"> {{element.tinNo}} </td>
+  </ng-container>
+
+    <ng-container matColumnDef="cstNo">
+    <th mat-header-cell *matHeaderCellDef> cstNo </th>
+    <td mat-cell *matCellDef="let element"> {{element.cstNo}} </td>
+  </ng-container>
+
+    <ng-container matColumnDef="vatNo">
+    <th mat-header-cell *matHeaderCellDef> vatNo </th>
+    <td mat-cell *matCellDef="let element"> {{element.vatNo}} </td>
+  </ng-container>
+
+   
+
   <ng-container matColumnDef="actions">
    <th mat-header-cell *matHeaderCellDef  > Actions </th>
    <td mat-cell *matCellDef="let element"  > 
-     <a  mat-raised-button   color="primary" [routerLink]="['/wholeSeller/update', element.id]">Edit </a>
+     <a  mat-raised-button   color="primary" [routerLink]="['/wholeseller/update', element.id]">Edit </a>
     <a  mat-raised-button    color="warn" (click)="deleteDialog(myDialog, element.id)">Delete </a>
   </td>
   </ng-container>
