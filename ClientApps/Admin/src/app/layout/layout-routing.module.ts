@@ -27,6 +27,10 @@ const routes: Routes = [
       {
         path: 'medicinecategory',
         loadChildren: './medicineCategory/medicineCategory.module#MedicineCategoryModule'
+      },
+      {
+        path: 'schedulecategory',
+        loadChildren: './scheduleCategory/scheduleCategory.module#ScheduleCategoryModule'
       }
     ]
   }

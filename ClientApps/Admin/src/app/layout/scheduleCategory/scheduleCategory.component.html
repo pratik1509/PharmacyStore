@@ -1,0 +1,17 @@
+
+
+
+    <div fxLayout="row" fxLayoutAlign="end start" fxLayout="column" fxLayout.gt-md="row">
+      <a fxFlex="10" [routerLink]="['/schedulecategory/list']" mat-raised-button color="primary">
+        List
+      </a>
+      <a fxFlex="10" fxFlexOffset="10px" [routerLink]="['/schedulecategory/create']" mat-raised-button color="primary">
+        Create
+      </a>
+    </div>
+    <br>
+    <div class="mat-elevation-z8">
+      <router-outlet></router-outlet>
+    </div>
+
+
